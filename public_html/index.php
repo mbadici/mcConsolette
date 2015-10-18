@@ -29,7 +29,10 @@ $smarty->display("header.tpl");
 if(checklogin($username,$pass))
 {
     session_start();
-
+if($_SERVER['PHP_AUTH_USER'] == "admin")
+$_SESSION['isadmin']=1;
+else
+$_SESSION['seldomain']=substr(strstr($_SERVER['PHP_AUTH_USER'],'@',0),1);
 if ($view=="index.tpl")
 {
 $smarty->display("login/welcome.tpl");
@@ -39,7 +42,9 @@ switch($view)
 {
    case "list.tpl":
    {
+
    $seldomain=$_SESSION['seldomain'];
+
    echo "domain ".$_SESSION['seldomain']." active";
    $alist= list_users("NULL",$module,$seldomain);
    $smarty->assign('alist',$alist);
@@ -118,9 +123,12 @@ if($field_value!=NULL) $ldapobject[$field_name] = $field_value;
    }
    case "select.tpl":
    {
+if($_SESSION['isadmin'])
+{
    $alist= list_users("NULL",$module);
    $smarty->assign('alist',$alist);
-   break;
+} 
+  break;
    }
    case "selected.tpl":
    {
@@ -131,7 +139,6 @@ if($field_value!=NULL) $ldapobject[$field_name] = $field_value;
     $result=0;
    break;
    }
-   
 }
 
 $smarty->display($module."/".$view);

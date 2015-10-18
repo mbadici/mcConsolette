@@ -17,6 +17,7 @@ function uid_bind($user,$pass)
 global $rootdn;
 $ldapcon=ldap_init();
 $userdn=$rootdn;
+$base=$basedn;
 if($user!="admin")
 {
 $res = ldap_search($ldapcon, $basedn,"uid=".$user) or die("ldap search failed");
@@ -82,6 +83,7 @@ break;
 }
 
 $res = ldap_search($ldapcon, $basedn,$qry) or die("ldap search failed");
+echo $base;
 $number=ldap_count_entries($ldapcon,$res);
 if($number<1) 
 {$result[1][0]=$result[1][1]="no result";

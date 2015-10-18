@@ -1,0 +1,82 @@
+<?php
+define('SMARTY_DIR', '/usr/lib/php/Smarty/libs/');
+require_once(SMARTY_DIR . 'Smarty.class.php');
+require_once("../code/functions.php");
+$view= isset($_GET['view']) ? $_GET['view'] :"index.tpl";
+$module= isset($_GET['module']) ? $_GET['module'] :"";
+$username= isset($_POST['username']) ? $_POST['username'] :null;
+$pass= isset($_POST['pass']) ? $_POST['pass'] :"nopass";
+$smarty = new Smarty();
+$smarty->setTemplateDir('/usr/share/mcConsole/templates/');
+$smarty->setCompileDir('/usr/share/mcConsole/templates_c/');
+  $smarty->assign('username',$username);
+  $smarty->assign('pass',$pass);
+  
+//$tpl=str_replace(".php",".tpl",$_SERVER['PHP_SELF']);
+
+//if(login($username,$pass))
+//{
+//define("AUTHENTICATED","authenticated");
+//}
+if ($view=="index.tpl")
+{
+$smarty->display($view);
+} 
+else{
+
+if(checklogin($username,$pass))
+{
+
+
+switch($view)
+{
+   case "list.tpl":
+   {
+   $alist= list_users("NULL",$module);
+   $smarty->assign('alist',$alist);
+    break;
+   }
+   case "added.tpl":
+   {
+   $givenname= isset($_POST['givenname']) ? $_POST['givenname'] :"nobody";
+   $surname= isset($_POST['surname']) ? $_POST['surname'] :"nobody";
+   $template= isset($_POST['template']) ? $_POST['template'] :"nobody";
+   $password= isset($_POST['password']) ? $_POST['password'] :"nobody";
+   
+   $result=newuseradd($givenname,$surname,$template,$password,$module);
+   $smarty->assign('result',$result);
+   break;
+   }
+   case "delete.tpl":
+   {
+   $userdn= isset($_GET['user']) ? $_GET['user'] :"";
+   $result=userdel($userdn);
+   $smarty->assign('result',$result);
+   break;
+   }
+   case "changed.tpl":
+   {
+   $userdn= isset($_GET['user']) ? $_GET['user'] :"";
+   $password= isset($_POST['password']) ? $_POST['password'] :"nobody";
+    $result=changepass($userdn,$password);
+   $smarty->assign('result',$result);
+   break;
+   }
+   case "detail.tpl":
+   {
+   $userdn= isset($_GET['user']) ? $_GET['user'] :"";
+   $result=details($userdn,$module);
+   $smarty->assign('result',$result);
+   break;
+   }
+   
+}
+
+$smarty->display($module."/".$view);
+}
+else
+{
+$smarty->display("index.tpl");
+}
+}
+?>
