@@ -11,16 +11,20 @@ $ldapcon=ldap_connect($ldapuri) or die("Error connecting");
 ldap_set_option($ldapcon,LDAP_OPT_PROTOCOL_VERSION,3);
 //if($bnd) { ldap_bind($ldapcon,$userdndn,$passwd);}
 return $ldapcon;
+
 }
 function uid_bind($user,$pass)
 {
 global $rootdn;
 $ldapcon=ldap_init();
+if(!ldap_bind($ldapcon)) {  return -3;}
+
 $userdn=$rootdn;
 
 if($user!="admin")
 {
 $res = ldap_search($ldapcon, $basedn,"uid=".$user) or die("ldap search failed");
+echo $res;
 if(!ldap_count_entries($ldapcon,$res)) return NULL;
 $entry = ldap_first_entry($ldapcon, $res);
 $userdn=ldap_get_dn($ldapcon,$entry);
@@ -50,8 +54,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 
 function login($user,$pass)
 {
-if(uid_bind($user,$pass)!=NULL){return 1;} 
-return 0;
+return(uid_bind($user,$pass));
 
 }
 

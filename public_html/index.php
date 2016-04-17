@@ -1,5 +1,5 @@
 <?php
-define('SMARTY_DIR', '/usr/share/php/smarty3/');
+define('SMARTY_DIR', '/usr/share/smarty-3.1.29/libs/');
 
 if(!include_once(SMARTY_DIR . 'Smarty.class.php')) echo "smarty not present, please install it and adjust the path in index.php";
 require_once("../code/functions.php");
@@ -26,22 +26,27 @@ $smarty->assign('LANG',$LANG);
 //} 
 //else
 //{
+$smarty->display("header.tpl");
 
-if(!checklogin($username,$pass))
-{
+switch(checklogin($username,$pass)){
+
+case 1:
+
 
     header("HTTP/1.0 401 Unauthorized");
     header("WWW-authenticate: Basic realm=\"mcConsole\"");
     header("Content-type: text/html");
-$smarty->display("header.tpl");
-
+  break;
+case -3:
+    echo "the LDAP server is not reacheable";
     $smarty->display("settings/populate.tpl");
-}
+    break;
 
-else{
-session_start();
-$smarty->display("header.tpl");
 
+case 0: 
+  session_start();
+  $smarty->display("header.tpl");
+  break;
     switch($view)
     {
 	case "index.tpl":
