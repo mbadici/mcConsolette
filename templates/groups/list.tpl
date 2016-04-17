@@ -6,10 +6,10 @@
 <body>
 <table>
 {section   loop=$alist name=ind}
-<tr> <td> <a href = index.php?module=groups&view=detail.tpl&user={$alist[ind][0]|escape: 'url'}>{$alist[ind][1]}</a></td><td><a href = index.php?module=groups&view=delete.tpl&user={$alist[ind][0]|escape: 'url'}>Delete</a></td> </tr>
+<tr> <td> <a href = index.php?module=groups&view=detail.tpl&user={$alist[ind][0]|escape: 'url'}>{$alist[ind][1]}</a></td><td><a href = index.php?module=groups&view=delete.tpl&user={$alist[ind][0]|escape: 'url'}>{$LANG["Delete"]}</a></td> </tr>
 {/section}
 </table>
-<a href = index.php?module=groups&view=new.tpl>Create new</a>
+<a href = index.php?module=groups&view=new.tpl>{$LANG["New group"]}</a>
 
 </body>
 </html>

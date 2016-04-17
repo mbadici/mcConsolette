@@ -10,8 +10,9 @@
 <p>
 
 <a href = index.php?module=login$view=welcome.tpl><input type="button" name="HOME" value="HOME" /></a>
-<a href = index.php?module=users&view=new.tpl  > <input type="button" name="New USER" value="New User" /></a> 
-<a href = index.php?module=domains&view=select.tpl > <input type="button" name="Select Domain" value="Select Domain" /> </a>
+<a href = index.php?module=users&view=new.tpl  > <input type="button" name="New USER" value= "{$LANG["New user"] }" /></a> 
+<a href = index.php?module=groups&view=list.tpl  > <input type="button" name="Groups" value="{$LANG["Groups"]}" /></a> 
+<a href = index.php?module=domains&view=select.tpl > <input type="button" name="Select Domain" value="{$LANG["Select domain"]}" /> </a>
 </p>
 </div>
 <div class="continut">

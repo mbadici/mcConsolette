@@ -17,7 +17,7 @@ function uid_bind($user,$pass)
 global $rootdn;
 $ldapcon=ldap_init();
 $userdn=$rootdn;
-$base=$basedn;
+
 if($user!="admin")
 {
 $res = ldap_search($ldapcon, $basedn,"uid=".$user) or die("ldap search failed");
@@ -58,10 +58,20 @@ return 0;
 function list_users($query,$ou,$seldomain)
 {
 $ldapcon=ldap_init() or die("Error connecting");
-$qry="mail=*";
+#$qry="mail=*";
+
 //global $domain;
-global $basedn;
-echo $domain;
+echo $seldomain;
+if($seldomain!="alldomains")
+{
+$basedn="ou=".$seldomain.",dc=machinet";
+}
+else
+{
+$basedn="dc=machinet";
+}
+
+//global $basedn;
 switch($ou)
 {
 case "users":
@@ -72,7 +82,8 @@ break;
 }
 case "groups":
 {
-$qry="(&(objectclass=groupofnames)(ou=".$seldomain."))";
+$qry="objectclass=groupofnames";
+$basedn="ou=".$seldomain.",dc=machinet";
 break;
 }
 case "domains":
@@ -81,11 +92,10 @@ $qry="objectclass=dnsdomain";
 break;
 }
 }
+$res = ldap_search($ldapcon, "dc=machinet",$qry)   or die ($nr=0);//or die("ldap search failed1");
 
-$res = ldap_search($ldapcon, $basedn,$qry) or die("ldap search failed");
-echo $base;
 $number=ldap_count_entries($ldapcon,$res);
-if($number<1) 
+if($number<1 or $nr=0) 
 {$result[1][0]=$result[1][1]="no result";
 }
 else{
@@ -122,7 +132,7 @@ return 1;
 function details($userdn)
 {
 $ldapcon=ldap_init() or die("Error connecting");
-$res = ldap_search($ldapcon, $userdn,"objectclass=*") or die("ldap search failed");
+$res = ldap_search($ldapcon, $userdn,"objectclass=*") or die("ldap search failed2");
 $number=ldap_count_entries($ldapcon,$res);
 $entry = ldap_first_entry($ldapcon, $res);
 $res= ldap_get_attributes($ldapcon, $entry);
@@ -152,15 +162,15 @@ $mailcustomer["cn"]= $givenname." ".$surname;
 $mailcustomer["gn"]= $givenname;
 $mailcustomer["objectclass"][0]="inetorgperson";
 //$mailcustomer["objectclass"][1]="vacation";
-$mailcustomer["objectclass"][1]="mailaccount";
+//$mailcustomer["objectclass"][1]="mailaccount";
 $mailcustomer["userpassword"]=$password;
 $mailcustomer["uid"]=$uid;
 $mailcustomer["telephonenumber"]="0";
 $mailcustomer["mobile"]="0";
-$mailcustoner["vacationActive"]='FALSE';
+//$mailcustoner["vacationActive"]='FALSE';
 $mailcustomer["mail"]= $uid;
 //$mailcustomer[""]= $givenname;$fullcn= "cn=".$mailcustomer["cn"].",ou=Users,dc=machinet";
-$fullcn= "cn=".$mailcustomer["cn"].",ou=".$domain.",ou=users,dc=machinet";
+$fullcn= "cn=".$mailcustomer["cn"].",ou=users,ou=".$domain.",dc=machinet";
 break;
 }
 case "domains":
@@ -172,13 +182,13 @@ $mailc["ou"] = $givenname;
 $fullcn= "ou=".$givenname.",dc=machinet";
 $mailc["objectclass"][0]="top";
 $mailc["objectclass"][1]="organizationalUnit";
-
+echo $fullcn;
 $ldapcon=uid_bind($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']);
 $res=ldap_add($ldapcon,$fullcn,$mailc);
 
 // container for users
 $mailc["ou"] = $givenname;
-$fullcn= "ou=".$givenname.",ou=users,dc=machinet";
+$fullcn= "ou=users,ou=".$givenname.",dc=machinet";
 $mailc["objectclass"][0]="top";
 $mailc["objectclass"][1]="organizationalUnit";
 $res=ldap_add($ldapcon,$fullcn,$mailc);
@@ -206,7 +216,7 @@ $mailcustomer["objectclass"][0]="groupofnames";
 $mailcustomer["member"][0]=$surname;
 echo $mailcustomer["member"][0];
 $fullcn= "cn=".$mailcustomer["cn"].",ou=groups,ou=".$domain.",dc=machinet";
-
+echo $fullcn;
 break;
 }
 }
@@ -230,7 +240,7 @@ if($binduser="admin") $binduser=$rootdn;
 $bindpw=$_SERVER['PHP_AUTH_PW'];
 $command="ldappasswd -D $binduser -x -w $bindpw -s ".$pass." "."'".$dn."'";
 //echo $command;
-return shell_exec($command);
+return !shell_exec($command);
 
 }
 function moduser($dn,$ldapobject,$op,$module)
@@ -240,6 +250,10 @@ global $domain;
 $ldapcon=uid_bind($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']);
 if($op=="change")
 {
+//if($module="groups")
+//{
+//if(end($ldapobject->member)!="") echo "not";
+//}
 $res=ldap_modify($ldapcon,$dn,$ldapobject);
 }
 elseif($op=="disable")

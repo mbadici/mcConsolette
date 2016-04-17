@@ -4,8 +4,13 @@
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 </head>
 <body>
-Operation {$result}
-<a href = index.php?module=users&view=new.tpl>Create new</a>
+{if $result eq '1'}
+Operation suceeded
+{else} 
+Operation failed
+{/if}
+
+<a href = index.php?module=users&view=new.tpl></a>
 
 </body>
 </html>

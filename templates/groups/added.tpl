@@ -5,7 +5,11 @@
 <meta http-equiv="REFRESH" content="3;url=index.php?module=groups&view=list.tpl" >
 </head>
 <body>
-Operation {$result}
+{if $result eq '1'}
+Operation suceeded
+{else} 
+Operation failed
+{/if}
 
 </body>
 </html>

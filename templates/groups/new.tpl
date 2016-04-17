@@ -4,15 +4,15 @@
 </head>
 
 <body>
-New user
+{$LANG["New group"]}
 <Form action=index.php?module=groups&view=added.tpl method=post>
 <table>
 <tr><td>
-Grup name</td><td><input type=txt name= givenname>
+{$LANG["Group name"]}</td><td><input type=txt name= givenname>
 </td> </tr>
 <tr><td>
 
-Member</td><td><input type=txt name= surname>
+{$LANG["Member"]}</td><td><input type=txt name= surname>
 </td></tr>
 </table>
 <input type=submit value=add >

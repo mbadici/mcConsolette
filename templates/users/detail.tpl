@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 </head>
 <body>
-list user
+{$LANG["details"]}
 {$smarty.get.user}
 
 <br>
@@ -32,9 +32,9 @@ list user
 {/foreach}
 </table>
 <input type=hidden name=userdn value="{$smarty.get.user}">
-<input type=submit name="op" value="change">
+<input type=submit name="op" value="{$LANG["Change"]}">
 <form>
-<a href= index.php?module=users&view=delete.tpl&user={$smarty.get.user|escape:'url'}> Delete</a>
+<a href= index.php?module=users&view=delete.tpl&user={$smarty.get.user|escape:'url'}>{$LANG["Delete"]}</a>
 
 </body>
 </html>

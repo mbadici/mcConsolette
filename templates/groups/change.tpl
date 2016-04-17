@@ -8,7 +8,11 @@
 <body>
 {$smarty.get.user}
 
-Operation {$result}
+{if $result eq '1'}
+Operation suceeded
+{else} 
+Operation failed
+{/if}
 
 </body>
 </html>

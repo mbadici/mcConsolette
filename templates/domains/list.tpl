@@ -9,7 +9,7 @@
 {/section}
 
 </table>
-<a href = index.php?module=domains&view=new.tpl>Create new</a>
+<a href = index.php?module=domains&view=new.tpl>{$LANG["New domain"]}</a>
 
 </body>
 </html>

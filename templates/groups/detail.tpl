@@ -1,5 +1,5 @@
 
-list user
+{$LANG["details"]}
 {$smarty.get.user}
 
 <br>
@@ -81,8 +81,8 @@ insertHere.parentNode.insertBefore(newFields,insertHere);
 
 <div id="stage" >
  </div>
-<input type=submit value=change name="op">
+<input type=submit value="{$LANG["add"]}" name="op">
 </form>
 
-<a href= index.php?module=users&view=delete.tpl&user={$smarty.get.user|escape:'url'}> Delete</a>
+<a href= index.php?module=groups&view=delete.tpl&user={$smarty.get.user|escape:'url'}> {$LANG["Delete"]}</a>
 
