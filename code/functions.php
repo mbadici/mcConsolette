@@ -17,44 +17,36 @@ function uid_bind($user,$pass)
 {
 global $rootdn;
 $ldapcon=ldap_init();
-if(!ldap_bind($ldapcon)) {  return -3;}
+if(!ldap_bind($ldapcon)) {   return -3;}
 
 $userdn=$rootdn;
 
 if($user!="admin")
 {
-$res = ldap_search($ldapcon, $basedn,"uid=".$user) or die("ldap search failed");
-echo $res;
-if(!ldap_count_entries($ldapcon,$res)) return NULL;
+$res = ldap_search($ldapcon, $basedn,"uid=".$user) ;
+if(!ldap_count_entries($ldapcon,$res)) return 0;
 $entry = ldap_first_entry($ldapcon, $res);
 $userdn=ldap_get_dn($ldapcon,$entry);
 }
 if(ldap_bind($ldapcon,$userdn,$pass)==1) { return $ldapcon;}
 
- return NULL;
 
 }
 function checklogin($username,$pass)
 {
 
-{
-if (!isset($_SERVER['PHP_AUTH_USER'])) {
-    header('WWW-Authenticate: Basic realm="mcConsole"');
-        header('HTTP/1.0 401 Unauthorized');
-            echo 'Please login to use the console';
-	    return FALSE;
-                exit;
-                } else {
-            return (login($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']));
-                      }
+return (login($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']));
 
-}
+
+
 
 }
 
 function login($user,$pass)
 {
-return(uid_bind($user,$pass));
+$ret=uid_bind($user,$pass);
+if($ret==NULL) return -2;
+return $ret;
 
 }
 

@@ -6,8 +6,8 @@ require_once("../code/functions.php");
 require_once("../code/lang/Ro_ro.php");
 $view= isset($_GET['view']) ? $_GET['view'] :"index.tpl";
 $module= isset($_GET['module']) ? $_GET['module'] :"";
-$username= isset($_POST['username']) ? $_POST['username'] :$logusername;
-$pass= isset($_POST['pass']) ? $_POST['pass'] :$logpass;
+$username= isset($_POST['username']) ? $_POST['username'] :"";
+$pass= isset($_POST['pass']) ? $_POST['pass'] :"";
 $smarty = new Smarty();
 $smarty->setTemplateDir('../templates/');
 $smarty->setCompileDir('../templates_c/');
@@ -26,27 +26,32 @@ $smarty->assign('LANG',$LANG);
 //} 
 //else
 //{
-$smarty->display("header.tpl");
 
+  
+
+
+if(uid_bind("a"."b")){
+    $smarty->display("header.tpl");
+	 echo "the LDAP server is not reacheable";
+    $smarty->display("settings/populate.tpl");
+
+}
+
+
+   
 switch(checklogin($username,$pass)){
-
-case 1:
-
+case -2:
 
     header("HTTP/1.0 401 Unauthorized");
     header("WWW-authenticate: Basic realm=\"mcConsole\"");
     header("Content-type: text/html");
-  break;
-case -3:
-    echo "the LDAP server is not reacheable";
-    $smarty->display("settings/populate.tpl");
     break;
+default:
 
-
-case 0: 
   session_start();
   $smarty->display("header.tpl");
-  break;
+
+
     switch($view)
     {
 	case "index.tpl":
@@ -164,9 +169,9 @@ case 0:
     }
 
 $smarty->display($module."/".$view);
-$smarty->display("footer.tpl");
 
 }
+$smarty->display("footer.tpl");
 
 
 ?>
