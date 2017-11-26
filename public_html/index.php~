@@ -1,0 +1,49 @@
+<?php
+//if ( !isset($_SESSION['id'])) 
+session_start();
+
+require_once("includes.php");
+require_once("../code/functions.php");
+require_once("../code/phprun.php");
+//require_once("../code/lang/Ro_ro.php");
+$view= isset($_GET['view']) ? $_GET['view'] :"login.tpl";
+
+//$module= "login";
+$module= isset($_GET['module']) ? $_GET['module'] :"login";
+$username= isset($_POST['username']) ? $_POST['username'] :$logusername;
+$pass= isset($_POST['pass']) ? $_POST['pass'] :$logpass;
+$smarty = new Smarty();
+$smarty->setTemplateDir('../templates/');
+$smarty->setCompileDir('../templates_c/');
+$smarty->assign('username',$username);
+$smarty->assign('pass',$pass);
+$smarty->assign('LANG',$LANG);
+
+$smarty->display("header.tpl"); 
+
+
+if($_SESSION['authenticated']!=1)
+{
+if(login($username,$pass))
+	{
+	$_SESSION['authenticated']=1;
+	$_SESSION['user']=$username;
+	$_SESSION['pass']=$pass;
+	$module="login"; $view="welcome.tpl";
+	echo 1;
+	}
+	else{	
+			$module="login"; $view="login.tpl";
+			echo 0;			
+			}
+			
+}
+echo 3;
+$smarty->assign('message',$error_message);	
+ 	$smarty->display($module."/".$view);
+	$smarty->display("messages.tpl");
+	$smarty->display("footer.tpl");
+
+
+
+?>

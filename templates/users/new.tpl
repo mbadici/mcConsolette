@@ -7,12 +7,11 @@ function setuid(tpl)
 partone=document.getElementById('gn').value.toLowerCase();
 if(tpl==2) partone=partone.charAt(0);
 parttwo=document.getElementById('sn').value.toLowerCase();
+
 document.getElementById('uid').value=partone+'.'+parttwo;
 
-if(tpl==3)
-
-document.getElementById('uid').value=partone;
-
+if(tpl==3) document.getElementById('uid').value=partone;
+if(tpl==4) document.getElementById('uid').value=parttwo+'.'+partone;
 }
 </script>
 <link rel="stylesheet" type="text/css" href="css/common.css" />
@@ -27,7 +26,7 @@ New user
 <tr><td>mail</td><td><input type=txt name=uid id=uid > @{$domain}</td></tr>
 
 </td></tr>
-<tr><td>parola</td><td><input type=txt name=password> </td></tr>
+<tr><td>parola</td><td><input type=txt name=password value={$pass}> </td></tr>
 </table>
 <input type=submit value=add >
 </form>
@@ -35,6 +34,7 @@ New user
 <button  onclick="setuid(1)"> <i>prenume.nume</i></buton>
 <button  onclick="setuid(2)"> <i>initiala.nume</i></buton>
 <button  onclick="setuid(3)"> <i>prenume</i></buton>
+<button  onclick="setuid(4)"> <i>nume.prenume</i></buton>
 
 </body>
 </html>

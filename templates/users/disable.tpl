@@ -4,7 +4,7 @@
 </head>
 <body>
 New user
-<Form action=index.php?module=users&view=change.tpl method=post>
+<Form action=index.php?module=users&view=change.tpl&user= method=post>
 <table>
 
 <tr><td>userdn</td><td><input type=txt name=userdn> </td></tr>

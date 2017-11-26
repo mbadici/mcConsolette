@@ -9,10 +9,10 @@
 <Form action=index.php?module=users&view=changed.tpl&user={$userdn} method=post>
 <table>
 <tr><td>
-{$LANG["password"]}</td><td><input type=password name={$LANG["password"]} > </td></tr>
+{$LANG["password"]}</td><td><input type=password name=password> </td></tr>
 <tr><td>
 
-{$LANG["confirm"]} </td><td><input type=password name={$LANG["confirm"]}>
+{$LANG["confirm"]} </td><td><input type=password name=password2>
 <input type=submit value={$LANG["Change"]} ></td></tr>
 </table>
 </form>

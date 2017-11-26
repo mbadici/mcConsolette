@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 </head>
 <body>
-WELCOME! {$smarty.post.username}<br>
+WELCOME {$username}  !<br>
 
 <a href= index.php?module=users&view=list.tpl>{$LANG["Users"]}</a>
 <br>

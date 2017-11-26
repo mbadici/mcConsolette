@@ -1,75 +1,69 @@
 <?php
 require_once "config.php";
-//include_once "code/lang/RO_ro.php";
+include_once "lang/RO_ro.php";
+
 function ldap_init()
 {
 global $ldapuri;
-global $error_code;
-
 //global $basedn;
 //global $rootdn;
 //global $rootpasswd;
-$ldapcon=ldap_connect($ldapuri) or die( $error_code="UNCONN");
+$ldapcon=ldap_connect($ldapuri) or die("Error connecting");
 ldap_set_option($ldapcon,LDAP_OPT_PROTOCOL_VERSION,3);
 //if($bnd) { ldap_bind($ldapcon,$userdndn,$passwd);}
-//echo $error_code;
 return $ldapcon;
 }
+
 function uid_bind($user,$pass)
 {
-global $rootdn;
-global $error_code;
+    global $rootdn;
+    global $error_message;
+    $ldapcon=ldap_init();
+    $userdn=$rootdn;
 
-$basedn="dc=machinet";
-$ldapcon=ldap_init();
-$userdn=$rootdn;
-if(!strcmp($user,"admin")) $userdn="cn=Manager,dc=machinet";
+    if($user!="admin"){
+	$res = ldap_search($ldapcon, $basedn,"uid=".$user);
 
-if($user!="admin")
-{
-$res = ldap_search($ldapcon, $basedn,"uid=".$user) or die("no result");
-if(!ldap_count_entries($ldapcon,$res)) return NULL;
-$entry = ldap_first_entry($ldapcon, $res);
-$userdn=ldap_get_dn($ldapcon,$entry);
-}
-if(ldap_bind($ldapcon,$userdn,$pass)==1) { return $ldapcon;}
-$error_code="BIND";
- return NULL;
+	//$error_message=ldap_err2str (ldap_errno($ldapcon));
+	if(!ldap_count_entries($ldapcon,$res)) 
+	{
+	$error_message="no such user";
+	return 0;
+	}
+	$entry = ldap_first_entry($ldapcon, $res);
+	$userdn=ldap_get_dn($ldapcon,$entry);
+	}
+    else {
+	
+	$userdn=$rootdn;
+	}
+$RET=ldap_bind($ldapcon,$userdn,$pass);
+$error_message=ldap_err2str (ldap_errno($ldapcon));
+return $RET;
 
-}
-function checklogin($username,$pass)
-{
-global $error_code;
-
-//echo $error_code;
-echo "error";
-            return (login($username,$pass));
-//                      }
 
 }
-
 
 function login($user,$pass)
 {
-if(uid_bind($user,$pass)!=NULL){return 0;} 
-return 1;
+return uid_bind($user,$pass); 
 
 }
 
 function list_users($query,$ou,$seldomain)
 {
+global $error_message;	
 $ldapcon=ldap_init() or die("Error connecting");
 #$qry="mail=*";
 
 //global $domain;
-//echo $seldomain;
+echo $seldomain;
 if($seldomain!="alldomains")
 {
-//$seldomain="ihts.ro";
-#$basedn="ou=".$seldomain.",dc=machinet";
-#}
-#else
-#{
+$basedn="ou=".$seldomain.",dc=machinet";
+}
+else
+{
 $basedn="dc=machinet";
 }
 
@@ -85,7 +79,7 @@ break;
 case "groups":
 {
 $qry="objectclass=groupofnames";
-$basedn="dc=machinet";
+$basedn="ou=".$seldomain.",dc=machinet";
 break;
 }
 case "domains":
@@ -94,9 +88,8 @@ $qry="objectclass=dnsdomain";
 break;
 }
 }
-//$basedn="dc=machinet";
 $res = ldap_search($ldapcon, "dc=machinet",$qry)   or die ($nr=0);//or die("ldap search failed1");
-
+$error_message=ldap_err2str (ldap_errno($ldapcon));
 $number=ldap_count_entries($ldapcon,$res);
 if($number<1 or $nr=0) 
 {$result[1][0]=$result[1][1]="no result";
@@ -136,9 +129,11 @@ function details($userdn)
 {
 $ldapcon=ldap_init() or die("Error connecting");
 $res = ldap_search($ldapcon, $userdn,"objectclass=*") or die("ldap search failed2");
+$error_message=ldap_err2str (ldap_errno($ldapcon));
 $number=ldap_count_entries($ldapcon,$res);
 $entry = ldap_first_entry($ldapcon, $res);
 $res= ldap_get_attributes($ldapcon, $entry);
+
 for ($i=0; $i < $res["count"]; $i++) {
 	//			    $attrs=$attrs.",".$res[$i] ;
 				    $resu[$res[$i]]=ldap_get_values($ldapcon,$entry,$res[$i]);
@@ -151,7 +146,7 @@ return $resu;
  
 function newuseradd($givenname,$surname,$uid,$domain,$password,$module)
 {
-
+global $error_message;
 echo $module;
 echo "\n";
 switch($module)
@@ -164,9 +159,8 @@ $mailcustomer["sn"]= $surname;
 $mailcustomer["cn"]= $givenname." ".$surname;
 $mailcustomer["gn"]= $givenname;
 $mailcustomer["objectclass"][0]="inetorgperson";
-$mailcustomer["objectclass"][1]="mailaccount";
-$mailcustomer["objectclass"][2]="accountable";
-$mailcustomer["objectclass"][3]="";
+//$mailcustomer["objectclass"][1]="vacation";
+//$mailcustomer["objectclass"][1]="mailaccount";
 $mailcustomer["userpassword"]=$password;
 $mailcustomer["uid"]=$uid;
 $mailcustomer["telephonenumber"]="0";
@@ -218,20 +212,22 @@ case "groups":
 $mailcustomer["cn"]= $givenname;
 $mailcustomer["objectclass"][0]="groupofnames";
 $mailcustomer["member"][0]=$surname;
-#echo $mailcustomer["member"][0];
+echo $mailcustomer["member"][0];
 $fullcn= "cn=".$mailcustomer["cn"].",ou=groups,ou=".$domain.",dc=machinet";
+echo $fullcn;
 break;
 }
 }
-$ldapcon=uid_bind($_SESSION['username'],$_SESSION['password']);
-
+$ldapcon=uid_bind($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']);
+$error_message=ldap_err2str (ldap_errno($ldapcon));
 $res=ldap_add($ldapcon,$fullcn,$mailcustomer);
 ldap_close($ldapcon);
+
 return $res;
 }
 function userdel($dn)
 {
-$ldapcon=uid_bind($_SESSION['username'],$_SESSION['password']);
+$ldapcon=uid_bind($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']);
 
 return ldap_delete($ldapcon,$dn);
 }
@@ -239,22 +235,19 @@ function changepass($dn,$pass,$pass2)
 {
 global $rootdn;
 if($pass!=$pass2) return 0;
-$binduser=$_SESSION["username"];
-if($binduser=="admin") $binduser=$rootdn;
-else {
-$binduser=$dn;
-}
-
-$bindpw=$_SESSION['password'];
-$command="ldappasswd -D '".$binduser."' -x -w $bindpw -s ".$pass." "."'".$dn."'";
-echo $command;
+$binduser=$_SERVER['PHP_AUTH_USER'];
+if($binduser="admin") $binduser=$rootdn;
+$bindpw=$_SERVER['PHP_AUTH_PW'];
+$command="ldappasswd -D $binduser -x -w $bindpw -s ".$pass." "."'".$dn."'";
+//echo $command;
 return !shell_exec($command);
 
 }
 function moduser($dn,$ldapobject,$op,$module)
 {
+echo $dn;
 global $domain;
-$ldapcon=uid_bind($_SESSION['username'],$_SESSION['password']);
+$ldapcon=uid_bind($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']);
 if($op=="change")
 {
 //if($module="groups")
@@ -282,7 +275,7 @@ else
 $ldapobject="member";
 if($module=="users") $ldapobject="mail";
 $ob[$ldapobject]=$op;
-#echo $ldapobject;
+echo $ldapobject;
 echo "<br>";
 $res=ldap_mod_del($ldapcon,$dn,$ob);
 
@@ -298,8 +291,8 @@ function selectdomain($selecteddomain)
 {
 global $domain;
 $domain=$selecteddomain;
-$session_start();
-$_SESSION['domain']=$domain;
+//$session_start();
+//$_SESSION['domain']=$domain;
 echo $domain." selected";
 }
 ?>

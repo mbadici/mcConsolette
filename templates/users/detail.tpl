@@ -30,9 +30,13 @@
 
 </tr>
 {/foreach}
+<tr> <td>mailForward </td><td> <input  type=text name=mailforward>  </input> </td> </tr>
+
+
 </table>
 <input type=hidden name=userdn value="{$smarty.get.user}">
-<input type=submit name="op" value="{$LANG["Change"]}">
+<input type=hidden name="op" value="change">
+<input type=submit name="submit" value="{$LANG["Change"]}">
 <form>
 <a href= index.php?module=users&view=delete.tpl&user={$smarty.get.user|escape:'url'}>{$LANG["Delete"]}</a>
 

@@ -1,7 +1,7 @@
 <?php
 $ldapuri = "ldap://127.0.0.1";
 $basedn ="dc=machinet";
+$rootdn="cn=admin,dc=config";
 //$domain ="machinet.ro";
-$rootdn="cn=Manager,dc=machinet";
-$rootpasswd="enemy!";
+$error_code="ZERO";
 ?>

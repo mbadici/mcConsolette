@@ -6,7 +6,7 @@
 
    function DoPost(userdn){
      var  allstring = '{userdn: userdn,op: "disable"}';
-         $.post('index.php?module=users&view=change.tpl' , {userdn: userdn,op: "disable"});  //Your values here..
+         $.post('index.php?module=users&view=change.tpl&user='+userdn , {userdn: userdn,op: "disable"});  //Your values here..
             };
 </script>
 {/literal}
@@ -15,8 +15,11 @@
 <body>
 {$domain}
 <table border=1>
-{section   loop=$alist name=ind}
-<tr> <td> <a href = index.php?module=users&view=detail.tpl&user={$alist[ind][0]|escape: 'url'}>{$alist[ind][1]}</a></td><td><a href = index.php?module=users&view=delete.tpl&user={$alist[ind][0]|escape: 'url'}>{$LANG["Delete"]}</a></td><td><a href="javascript:DoPost('{$alist[ind][0]}')">{$LANG["Disable"]}</a></td><td><a href = index.php?module=users&view=changepass.tpl&user={$alist[ind][0]|escape: 'url'}>{$LANG["Change password"]}</a></td> </tr>
+{section   loop=$result name=ind}
+<tr> <td> <a href = index.php?module=users&view=detail.tpl&user={$result[ind][0]|escape: 'url'}>{$result[ind][1]}</a></td><td>
+<a href = index.php?module=users&view=delete.tpl&user={$result[ind][0]|escape: 'url'}>{$LANG["Delete"]}</a></td><td>
+<a href="javascript:DoPost('{$result[ind][0]}')">{$LANG["Disable"]}</a></td><td>
+<a href = index.php?module=users&view=changepass.tpl&user={$result[ind][0]|escape: 'url'}>{$LANG["Change password"]}</a></td> </tr>
 {/section}
 
 </table>

@@ -21,4 +21,5 @@ $LANG["Delete"]="Sterge";
 $LANG["Disable"]="Dezactiveaza";
 $LANG["Settings"]="Setari";
 $LANG["Change password"]="schimba parola";
+$LANG["logout"]="Iesire";
 ?>

@@ -2,9 +2,9 @@
   
 //$tpl=str_replace(".php",".tpl",$_SERVER['PHP_SELF']);
 require_once("../code/functions.php");
-   $alist= list_users("NULL","users");
+   $result= list_users("NULL","users");
     echo '<select id="users" multiple="multiple" onclick="addItem()">';
-    foreach($alist as $elm) {
+    foreach($result as $elm) {
    echo "<option value='".$elm[0]."'>" ;
    echo $elm[1];
    echo "</option>";
@@ -14,3 +14,4 @@ require_once("../code/functions.php");
 //$smarty->display($module."/".$view);
 
 ?>
+
