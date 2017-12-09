@@ -16,7 +16,8 @@
 {$j=0}
 {section name=email loop=$ind}
 {if $ind[email] != NULL}
-<td> {$ind@key} </td> <td><input type=text  name= {$ind@key}[{$j}] value={$ind[email]}> </td> <td> <button type=submit value="{$ind[email]}" name="op">Del </button> </td>
+<td> {$ind@key} </td> <td><input type=text  name= {$ind@key}[{$j}] value="{$ind[email]}"> </td> {if $j != 0} <td> <button type=submit value="{$ind[email]}" name="type_mod">Del </button> </td>{/if}
+
 <!--{$j++}-->
 {/if}
 </tr>

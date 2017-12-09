@@ -255,6 +255,8 @@ function moduser($dn,$ldapobject,$op,$module)
 {
 global $domain;
 $ldapcon=uid_bind($_SESSION['username'],$_SESSION['password']);
+
+//echo $op;
 if($op=="change")
 {
 //if($module="groups")
@@ -277,14 +279,15 @@ echo "<br>";
 $res=ldap_modify($ldapcon,$dn,$ob);
 
 }
-else
+elseif($op="Del")
 {
-$ldapobject="member";
-if($module=="users") $ldapobject="mail";
-$ob[$ldapobject]=$op;
-#echo $ldapobject;
-echo "<br>";
-$res=ldap_mod_del($ldapcon,$dn,$ob);
+$ldapobj="member";
+if($module=="users") $ldapobj="mail";
+$o[$ldapobj]=$ldapobject;
+//echo $ldapobject;
+//echo "<br>";
+//print_r($dn);
+$res=ldap_mod_del($ldapcon,$dn,$o);
 
 }
 

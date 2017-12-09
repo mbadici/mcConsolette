@@ -1,6 +1,7 @@
 <?php
 function settings($view,$param)
 {
+$errormsg="OK";
 switch($view){
 case "upload.tpl":
   {

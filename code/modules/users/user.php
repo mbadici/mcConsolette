@@ -9,7 +9,7 @@ function user_prepare($ldapobject){
 foreach($ldapobject["mail"]   as $el => $val) { if($val=="") unset($ldapobject["mail"][$el]);}
 foreach($ldapobject as $field_name => $field_value)
         {
-        if(($field_name== "userdn")||($field_name== "cn")||($field_name== "submit")||($field_name== "objectClass")||($field_name=="op")) unset($ldapobject[$field_name]);
+        if(($field_name== "userdn")||($field_name== "cn")||($field_name== "submit")||($field_name== "objectClass")||($field_name=="op")||($field_name=="type_mod")) unset($ldapobject[$field_name]);
         if($field_value=="") unset($ldapobject[$field_name]);
 
         }
@@ -43,8 +43,11 @@ switch ($view){
     case "change.tpl":
     $ldapobject=getpost();
     $op=$ldapobject["op"];
+    $type_mod=$ldapobject["type_mod"];
     $ldapobject=user_prepare($ldapobject);
-//    print_r($ldapobject);
+
+    if(isset($type_mod)) {  $op="Del";  $ldapobject=$type_mod;}
+
     $result=moduser($param,$ldapobject,$op,"users");
     break;
     case "disable.tpl":
@@ -54,8 +57,6 @@ switch ($view){
     print_r($ldapobject);
     $result=moduser($param,$ldapobject,$op,"users");
     break;
-
-
     case "added.tpl":
     $objectdata=getpost();
     $givenname=ucfirst($objectdata["givenname"]);

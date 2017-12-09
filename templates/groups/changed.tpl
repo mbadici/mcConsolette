@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta http-equiv="REFRESH" content="1;url=index.php?module=users&view=list.tpl">
+<meta http-equiv="REFRESH" content="{delay};url=index.php?module=users&view=list.tpl">
 </head>
 <body>
 {if $result eq '1'}

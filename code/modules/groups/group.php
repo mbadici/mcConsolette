@@ -37,6 +37,8 @@ switch($view){
 
     $ldapobject=user_prepare($ldapobject);
 //    print_r($ldapobject);
+    if($op!="change") { $ldapobject=$op; $op="Del";}
+
     $result=moduser($fullcn,$ldapobject,$op,"groups");
     break;
     case "added.tpl":
