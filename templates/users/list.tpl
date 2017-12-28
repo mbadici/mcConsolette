@@ -13,16 +13,17 @@
 </head>
 
 <body>
+<div class="container">
 {$domain}
-<table border=1>
 {section   loop=$result name=ind}
-<tr> <td> <a href = index.php?module=users&view=detail.tpl&user={$result[ind][0]|escape: 'url'}>{$result[ind][1]}</a></td><td>
-<a href = index.php?module=users&view=delete.tpl&user={$result[ind][0]|escape: 'url'}>{$LANG["Delete"]}</a></td><td>
-<a href="javascript:DoPost('{$result[ind][0]}')">{$LANG["Disable"]}</a></td><td>
-<a href = index.php?module=users&view=changepass.tpl&user={$result[ind][0]|escape: 'url'}>{$LANG["Change password"]}</a></td> </tr>
+<div class="row"> 
+<div class="col-md-3" > <a href = index.php?module=users&view=detail.tpl&user={$result[ind][0]|escape: 'url'}>{$result[ind][1]}</a></div>
+<div ><a class="btn btn-secondary" href = index.php?module=users&view=delete.tpl&user={$result[ind][0]|escape: 'url'}>{$LANG["Delete"]}</a></div>
+<div ><a class="btn btn-secondary" href="javascript:DoPost('{$result[ind][0]}')">{$LANG["Disable"]}</a></div>
+<div ><a class="btn btn-secondary"  href = index.php?module=users&view=changepass.tpl&user={$result[ind][0]|escape: 'url'}>{$LANG["Change password"]}</a> </div>
+</div>
 {/section}
-
-</table>
+</div>
 <a href = index.php?module=users&view=new.tpl>{$LANG["New user"]}</a>
 
 </body>

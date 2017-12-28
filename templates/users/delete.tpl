@@ -1,7 +1,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/common.css" />
-<meta http-equiv="REFRESH" content="{delay};url=index.php?module=users&view=list.tpl" >
+<meta http-equiv="REFRESH" content="{$delay};url=index.php?module=users&view=list.tpl" >
 </head>
 <body>
 {if $result eq '1'}

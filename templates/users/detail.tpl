@@ -2,7 +2,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 </head>
-<body>
+<body> 
 {$LANG["details"]}
 {$smarty.get.user}
 
@@ -16,28 +16,28 @@
 {$j=0}
 {section name=email loop=$ind}
 {if $ind[email] != NULL}
-<td> {$ind@key} </td> <td><input type=text  name= {$ind@key}[{$j}] value="{$ind[email]}"> </td> {if $j != 0} <td> <button type=submit value="{$ind[email]}" name="type_mod">Del </button> </td>{/if}
+<td> {$ind@key} </td> <td><input class="form-control" type=text  name= {$ind@key}[{$j}] value="{$ind[email]}"> </td> {if $j != 0} <td> <button type=submit value="{$ind[email]}" name="type_mod">Del </button> </td>{/if}
 
 <!--{$j++}-->
 {/if}
 </tr>
 
 {/section}
-<tr> <td> mail </td> <td><input type=text  name= {$ind@key}[{$j}] value=""> </td> </tr>
+<tr> <td> mail </td> <td><input class="form-control" type=text  name= {$ind@key}[{$j}] value=""> </td> </tr>
 {else}
-<td>{$ind@key} </td> <td><input type=text  name= "{$ind@key}"  value="{$ind[0]}"> </td>
+<td>{$ind@key} </td> <td><input class="form-control" type=text  name= "{$ind@key}"  value="{$ind[0]}"> </td>
 
 {/if}
 
 </tr>
 {/foreach}
-<tr> <td>mailForward </td><td> <input  type=text name=mailforward>  </input> </td> </tr>
+<tr> <td>mailForward </td><td> <input class="form-control" type=text name=mailforward>  </input> </td> </tr>
 
 
 </table>
 <input type=hidden name=userdn value="{$smarty.get.user}">
 <input type=hidden name="op" value="change">
-<input type=submit name="submit" value="{$LANG["Change"]}">
+<input class="btn btn-outline-success my-2 my-sm-0" type=submit name="submit" value="{$LANG["Change"]}">
 <form>
 <a href= index.php?module=users&view=delete.tpl&user={$smarty.get.user|escape:'url'}>{$LANG["Delete"]}</a>
 

@@ -13,7 +13,7 @@
  {section name=member loop=$ind}
 <tr>
 {if $ind[member]!=NULL }
-<td> {$ind@key} </td> <td><input type=text  name= member[{$j}] value="{$ind[member]}"> </td> <td> <button type=submit value="{$ind[member]}" name="op">Del </button> </td>
+<td> {$ind@key} </td> <td><input class="form-control" type=text  name= member[{$j}] value="{$ind[member]}"> </td> <td> <button type=submit value="{$ind[member]}" name="op">Del </button> </td>
 {$j=$j+1}
 {/if} 
 </tr>
@@ -23,13 +23,13 @@
 <div id=newform>
 
 <tr>
-<td>member </td><td><input type=text   name=fake value="" id="newmember"> </td>
+<td>member </td><td><input class="form-control" type=text   name=fake value="" id="newmember"> </td>
 
 </tr>
 </div>
 {else}
 <tr>
-<td>{$ind@key} </td> <td ><input type=text  name= {$ind@key}  value={$ind[0]}> </td> 
+<td>{$ind@key} </td> <td ><input class="form-control" type=text  name= {$ind@key}  value={$ind[0]}> </td> 
 </tr>
 {/if}
 

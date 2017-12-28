@@ -237,10 +237,10 @@ return ldap_delete($ldapcon,$dn);
 }
 function changepass($dn,$pass,$pass2)
 {
-global $rootdn;
+global $admindn;
 if($pass!=$pass2) return 0;
 $binduser=$_SESSION["username"];
-if($binduser=="admin") $binduser=$rootdn;
+if($binduser=="admin") $binduser=$admindn;
 else {
 $binduser=$dn;
 }
