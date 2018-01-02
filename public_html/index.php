@@ -1,3 +1,6 @@
+
+
+
 <?php 
 session_start();
 session_regenerate_id();
@@ -5,7 +8,7 @@ session_regenerate_id();
 define('SMARTY_DIR', '/usr/share/php/smarty3/');
 
 if(!include_once(SMARTY_DIR . 'Smarty.class.php')) echo "smarty not present, please install it and adjust the path in index.php";
-require_once("../code/functions.php");
+include_once("../code/functions.php");
 require_once("../code/lang/Ro_ro.php");
 require_once("../code/dispatcher.php");
 global $error_code;

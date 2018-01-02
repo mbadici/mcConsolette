@@ -13,10 +13,10 @@
 	 
 .continut {
          
-		   border: #003399 double 2px;
+		   border: #003399 double 1px;
 		   background: #CCCC99;
 		   text-align:left;
-		   font-size: 16px;
+		   font-size: 14px;
 		   font:Verdana, Arial, Helvetica, sans-serif;
 		   line-height: 30px;
 		   }
@@ -31,11 +31,11 @@ h3 {
 }
 
 .row {
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 .row .row {
-  margin-top: 1rem;
-  margin-bottom: 0;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
 }
 [class*="col-"] {
   padding-top: 0rem;
@@ -51,6 +51,26 @@ hr {
 
 
 
+.form-control {
+    max-height: 26px;
+}
+
+.btn-outline-success {
+  color: #0A0A2A;
+
+  border-color: #08082A;
+}
+.btn-outline-success:focus {
+  color: #0A0A2A;
+  background-color: rgba(86, 61, 124, .15);
+  border-color: rgba(86, 61, 124, .15);
+
+}
+.btn-outline-success:hover {
+  background-color: #08088A;
+  border-color: rgba(86, 61, 124, .1);
+
+}
 
 
 

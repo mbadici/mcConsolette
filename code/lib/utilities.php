@@ -10,7 +10,7 @@ function listobject($fullcn)
 {
 $ldapcon=bind();
 
-$res = ldap_search($ldapcon, $fullcn,"objectclass=*") or die("ldap search failed2");
+$res = ldap_search($ldapcon, $fullcn,"objectclass=*") or die("ldap search failed");
 $number=ldap_count_entries($ldapcon,$res);
 $entry = ldap_first_entry($ldapcon, $res);
 $attr= ldap_get_attributes($ldapcon, $entry);
@@ -25,7 +25,7 @@ function entrylist($basedn,$query)
 {
 $ldapcon=bind();
 
-$res = ldap_search($ldapcon, $basedn,$query) or die("ldap search failed2");
+$res = ldap_search($ldapcon, $basedn,$query) or die("ldap search failed");
 $number=ldap_count_entries($ldapcon,$res);
 $entry = ldap_first_entry($ldapcon, $res);
 
@@ -51,9 +51,6 @@ $result[$i][1]=$moreinfo[1];
 }
 }
 return $result;
-
-
-
 
 
 

@@ -2,7 +2,7 @@
 session_start();
 if( isset($_POST['username']) && isset($_POST['password']) )
 {
-require_once("../code/functions.php");
+include_once("../code/functions.php");
 
 global $error_code;
 

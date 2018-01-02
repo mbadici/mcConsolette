@@ -1,3 +1,8 @@
+<head>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+</head>
+
+
 <body>
 <form method=post action=index.php?module=domains&view=selected.tpl>
 <select name=selecteddomain>
