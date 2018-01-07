@@ -1,0 +1,30 @@
+dn: dc=machinet
+objectclass: top
+objectclass: dcObject
+objectclass: domain
+dc: machinet
+
+dc: machinet
+dn: ou=groups,dc=machinet
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+description: user groups
+
+dn: ou=users,dc=machinet
+objectclass: top
+objectclass: organizationalUnit
+ou: users
+description: users
+
+dn: ou=domains,dc=machinet
+objectclass: top
+objectclass:organizationalUnit
+ou: domains
+
+dn: dc=machinet.ro,ou=domains,dc=machinet
+objectclass: dnsdomain
+objectclass:top
+
+
+

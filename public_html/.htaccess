@@ -10,7 +10,6 @@ IndexIgnore *
 </FilesMatch>
 
 RewriteEngine on
-RewriteRule ^cucu\.htm$ index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)?$ index.php?module=$1&view=$2&id=$3
 

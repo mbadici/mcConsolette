@@ -3,14 +3,29 @@
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 </head>
 <body>
-BINE AI VENIT {$smarty.post.username}<br>
 
-<a href= index.php?module=users&view=list.tpl>Users</a>
-<br>
-<a href= index.php?module=groups&view=list.tpl>Groups</a>
-<br>
-<a href= index.php?module=domains&view=list.tpl>Domains</a>
-<br>
-<a href= index.php?module=settings&view=list.tpl>Settings</a>
+<div class="container">
+
+ WELCOME {$username}  ! 
+
+
+        <!-- Example row of columns -->
+
+          <div class="col-md-4">
+<a href= index.php?module=users&view=list.tpl>{$LANG["Users"]}</a>
+</div>
+<div class="col-md-4">
+
+<a href= index.php?module=groups&view=list.tpl>{$LANG["Groups"]}</a>
+</div>
+<div class="col-md-4">
+
+<a href= index.php?module=domains&view=list.tpl>{$LANG["Domains"]}</a>
+</div>
+<div class="col-md-4">
+
+<a href= index.php?module=settings&view=list.tpl>{$LANG["Settings"]}</a>
+</div>
+</div>
 </body>
 </html>

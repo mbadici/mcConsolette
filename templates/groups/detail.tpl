@@ -1,34 +1,39 @@
+<head>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+</head>
 
-list user
+
+{$LANG["details"]}
 {$smarty.get.user}
 
 <br>
-<form method=post action=index.php?module=groups&view=change.tpl>
+<form method=post action=index.php?module=groups&view=change.tpl&user={$smarty.get.user|escape:'url'}>
 <table>
 {foreach $result  as $ind}
 <tr>
 {if $ind@key  eq "member"}
 
 {$j=0}
-{section name=email loop=$ind}
+ {section name=member loop=$ind}
 <tr>
-{if $ind[email]!=NULL}
-<td> {$ind@key} </td> <td><input type=text  name= member[{$j}] value="{$ind[email]}"> </td> <td> <button type=submit value="{$ind[email]}" name="op">Del </button> </td>
+{if $ind[member]!=NULL }
+<td> {$ind@key} </td> <td><input class="form-control" type=text  name= member[{$j}] value="{$ind[member]}"> </td> <td> <button type=submit value="{$ind[member]}" name="op">Del </button> </td>
 {$j=$j+1}
 {/if} 
 </tr>
 
 {/section}
+
 <div id=newform>
 
 <tr>
-<td>member </td><td><input type=text   name= member[{$j}] value="" id="newmember"> </td>
+<td>member </td><td><input class="form-control" type=text   name=fake value="" id="newmember"> </td>
 
 </tr>
 </div>
 {else}
 <tr>
-<td>{$ind@key} </td> <td ><input type=text  name= {$ind@key}  value={$ind[0]}> </td>
+<td>{$ind@key} </td> <td ><input class="form-control" type=text  name= {$ind@key}  value={$ind[0]}> </td> 
 </tr>
 {/if}
 
@@ -48,8 +53,8 @@ list user
 var counter={$j};
 
     function addItem()
-    {    
-counter++;
+    {
+
 var selectBox = document.getElementById("users");
 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 
@@ -62,12 +67,14 @@ var newField = newFields.childNodes;
 //	    var theName = newField[i].name
 //		    if (theName)
 				newFields.name = "member["+counter+"]";
+counter++;
 //				    }
 	newFields.value=selectedValue;
 
 var insertHere = document.getElementById('newmember');
 insertHere.parentNode.insertBefore(newFields,insertHere);
-                  
+
+
       };
     $(document).ready(function() {
     $("#driver").click(function(event){
@@ -84,5 +91,5 @@ insertHere.parentNode.insertBefore(newFields,insertHere);
 <input type=submit value=change name="op">
 </form>
 
-<a href= index.php?module=users&view=delete.tpl&user={$smarty.get.user|escape:'url'}> Delete</a>
+<a href= index.php?module=groups&view=delete.tpl&user={$smarty.get.user|escape:'url'}> {$LANG["Delete"]}</a>
 

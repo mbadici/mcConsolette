@@ -4,23 +4,37 @@
 {literal}
 <script language="javascript"> 
 
-   function DoPost(userdn){
-     var  allstring = '{userdn: userdn,op: "disable"}';
-         $.post('index.php?module=users&view=change.tpl' , {userdn: userdn,op: "disable"});  //Your values here..
-            };
+   function DoPost(userdn,val){
+//	var  allstring = '{userdn: userdn,op: val}';
+	$.post('index.php?module=users&view=disable.tpl&user='+userdn , {op: val});  //Your values here..
+	location.reload(true);
+    };
 </script>
 {/literal}
 </head>
 
 <body>
+<div class="container">
 {$domain}
-<table border=1>
-{section   loop=$alist name=ind}
-<tr> <td> <a href = index.php?module=users&view=detail.tpl&user={$alist[ind][0]|escape: 'url'}>{$alist[ind][1]}</a></td><td><a href = index.php?module=users&view=delete.tpl&user={$alist[ind][0]|escape: 'url'}>Delete</a></td><td><a href="javascript:DoPost('{$alist[ind][0]}')">Disable</a></td><td><a href = index.php?module=users&view=changepass.tpl&user={$alist[ind][0]|escape: 'url'}>Change password</a></td> </tr>
-{/section}
+{section   loop=$result name=ind}
+<div class="row"> 
+<div class="col-md-2" > <a href = index.php?module=users&view=detail.tpl&user={$result[ind][0]|escape: 'url'}>{$result[ind][1]}</a></div>
+<div class="col-md-2"><a class="btn btn-secondary" href = index.php?module=users&view=delete.tpl&user={$result[ind][0]|escape: 'url'}>{$LANG["Delete"]}</a></div>
 
-</table>
-<a href = index.php?module=users&view=new.tpl>Create new</a>
+{if $result[ind][2] eq 'TRUE'}
+{assign var="text" value=$LANG["Disable"]}  {assign var="val" value="disable" }
+
+{else}
+   {assign var="text" value=$LANG["Enable"]} {assign var="val" value="enable"}
+{/if}
+<div class="col-md-2"><a class="btn btn-secondary" href="javascript:DoPost('{$result[ind][0]}','{$val}')">{$text}
+
+  </a></div>
+<div class="col-md-2"><a class="btn btn-secondary"  href = index.php?module=users&view=changepass.tpl&user={$result[ind][0]|escape: 'url'}>{$LANG["Change password"]}</a> </div>
+</div>
+{/section}
+</div>
+<a href = index.php?module=users&view=new.tpl>{$LANG["New user"]}</a>
 
 </body>
 </html>

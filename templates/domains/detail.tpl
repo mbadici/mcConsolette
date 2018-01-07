@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 </head>
 <body>
-list user
+{$LANG["details"]}
 {$smarty.get.user}
 
 <br>

@@ -13,14 +13,70 @@
 	 
 .continut {
          
-		   border: #003399 double 2px;
+		   border: #003399 double 1px;
 		   background: #CCCC99;
 		   text-align:left;
-		   font-size: 21px;
+		   font-size: 14px;
 		   font:Verdana, Arial, Helvetica, sans-serif;
 		   line-height: 30px;
 		   }
 		   
+body {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+h3 {
+  margin-top: 2rem;
+}
+
+.row {
+  margin-bottom: 0rem;
+}
+[class*="col-"] {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  background-color: rgba(86, 61, 124, .15);
+  border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.btn-secondary {
+    width:100%;
+  color: #0A0A2A;
+  background-color: rgba(86, 61, 124, .15);
+
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+
+
+.form-control {
+    max-height: 26px;
+}
+
+.btn-outline-success {
+  color: #0A0A2A;
+
+  border-color: #08082A;
+}
+.btn-outline-success:focus {
+  color: #0A0A2A;
+  background-color: rgba(86, 61, 124, .15);
+  border-color: rgba(86, 61, 124, .15);
+
+}
+.btn-outline-success:hover {
+  background-color: #08088A;
+  border-color: rgba(86, 61, 124, .1);
+
+}
+
+
+
 .footer {
          height: 100px;
 		 border: #003399 double 2px;

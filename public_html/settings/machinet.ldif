@@ -1,0 +1,13 @@
+dn: dc=machinet
+objectclass: top
+objectclass: domain
+dc: machinet
+
+dn: ou=domains,dc=machinet
+objectclass: top
+objectclass:organizationalUnit
+ou: domains
+
+dn: dc=machinet.ro,ou=domains,dc=machinet
+objectclass: dnsdomain
+objectclass:top
