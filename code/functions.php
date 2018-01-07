@@ -267,6 +267,8 @@ $res=ldap_modify($ldapcon,$dn,$ldapobject);
 }
 elseif($op=="disable")
 {
+//$res=ldap_get_entry($ldapcon,$dn,$ob);
+
 $ldapobject="billPaid";
 $ob[$ldapobject]="FALSE";
 echo "<br>";
@@ -279,6 +281,26 @@ echo "<br>";
 $res=ldap_modify($ldapcon,$dn,$ob);
 
 }
+
+elseif($op=="enable")
+{
+//$res=ldap_get_entry($ldapcon,$dn,$ob);
+
+$ldapobject="billPaid";
+$ob[$ldapobject]="TRUE";
+echo "<br>";
+
+echo $ldapobject;
+echo "<br>";
+
+echo $dn;
+echo "<br>";
+$res=ldap_modify($ldapcon,$dn,$ob);
+
+}
+
+
+
 elseif($op="Del")
 {
 $ldapobj="member";

@@ -33,15 +33,18 @@ h3 {
 .row {
   margin-bottom: 0rem;
 }
-.row .row {
-  margin-top: 0rem;
-  margin-bottom: 0rem;
-}
 [class*="col-"] {
   padding-top: 0rem;
   padding-bottom: 0rem;
   background-color: rgba(86, 61, 124, .15);
   border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.btn-secondary {
+    width:100%;
+  color: #0A0A2A;
+  background-color: rgba(86, 61, 124, .15);
+
 }
 
 hr {

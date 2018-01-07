@@ -19,6 +19,7 @@ $LANG["Users"]="Utilizatori";
 $LANG["Domains"]="Domenii";
 $LANG["Delete"]="Sterge";
 $LANG["Disable"]="Dezactiveaza";
+$LANG["Enable"]="Activeaza";
 $LANG["Settings"]="Setari";
 $LANG["Change password"]="schimba parola";
 $LANG["logout"]="Iesire";

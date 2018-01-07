@@ -17,10 +17,14 @@ return $ldapobject;
 switch ($view){
     case "list.tpl":
 //    $result=list_users("objectclass=dnsdomain","domains","ihts.ro");
-    $result=entrylist("dc=machinet","objectclass=dnsdomain");
+     $attrib=array("");
+
+    $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
     break;
     case "select.tpl":
-    $result=entrylist("dc=machinet","objectclass=dnsdomain");
+     $attrib=array("");
+
+    $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
 
 //    $result=list_users("objectclass=dnsdomain","domains","ihts.ro");
     break;

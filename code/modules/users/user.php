@@ -24,7 +24,8 @@ switch ($view){
 //    $result=list_users("mail=*","users",$seldomain);
     $basedn="dc=machinet";
     if($seldomain !=NULL) $basedn="ou=Users,ou=".$seldomain.",dc=machinet";
-    $result=entrylist($basedn,"mail=*");
+    $attrib=array("billpaid");
+    $result=entrylist($basedn,"mail=*",$attrib);
     break;
     case "detail.tpl":
 //    $result=details($param);
@@ -52,7 +53,8 @@ switch ($view){
     break;
     case "disable.tpl":
     $ldapobject=getpost();
-    $op="disable";
+    $op=$ldapobject["op"];
+
     $ldapobject=user_prepare($ldapobject);
     print_r($ldapobject);
     $result=moduser($param,$ldapobject,$op,"users");
