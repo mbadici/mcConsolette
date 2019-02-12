@@ -21,20 +21,20 @@ New user
 <Form action=index.php?module=users&view=added.tpl method=post>
 <table>
 
-<tr><td>Prenume</td><td><input class="form-control" type=txt name=givenname id=gn value="" onkeyup="setuid()"> </td></tr>
-<tr><td>Nume</td><td><input class="form-control" type=txt name=surname id=sn onkeyup="setuid()"> </td></tr>
+<tr><td>Givenname</td><td><input class="form-control" type=txt name=givenname id=gn value="" onkeyup="setuid()"> </td></tr>
+<tr><td>Surname</td><td><input class="form-control" type=txt name=surname id=sn onkeyup="setuid()"> </td></tr>
 <tr><td>mail</td><td><input  type=txt name=uid id=uid > @{$domain}</td></tr>
 
 </td></tr>
-<tr><td>parola</td><td><input class="form-control" type=txt name=password value={$pass}> </td></tr>
+<tr><td>password</td><td><input class="form-control" type=txt name=password value={$pass}> </td></tr>
 </table>
 <input class="btn btn-outline-success my-2 my-sm-0" type=submit value=add >
 </form>
 
-<button  class="btn btn-outline-success my-2 my-sm-0" onclick="setuid(1)"> <i>prenume.nume</i></buton>
-<button  class="btn btn-outline-success my-2 my-sm-0" onclick="setuid(2)"> <i>initiala.nume</i></buton>
-<button  class="btn btn-outline-success my-2 my-sm-0" onclick="setuid(3)"> <i>prenume</i></buton>
-<button  class="btn btn-outline-success my-2 my-sm-0" onclick="setuid(4)"> <i>nume.prenume</i></buton>
+<button  class="btn btn-outline-success my-2 my-sm-0" onclick="setuid(1)"> <i>givenname.name</i></buton>
+<button  class="btn btn-outline-success my-2 my-sm-0" onclick="setuid(2)"> <i>initial.name</i></buton>
+<button  class="btn btn-outline-success my-2 my-sm-0" onclick="setuid(3)"> <i>givenname</i></buton>
+<button  class="btn btn-outline-success my-2 my-sm-0" onclick="setuid(4)"> <i>name.surname</i></buton>
 
 </body>
 </html>

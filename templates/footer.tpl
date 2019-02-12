@@ -3,7 +3,7 @@
 
 <br />
 <br />
-Machinet Management Console provided by Mihai Badici
+Machinet Management Console 
 
 </div>
 
