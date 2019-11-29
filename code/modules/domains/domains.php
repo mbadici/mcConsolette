@@ -13,6 +13,7 @@ return $ldapobject;
 }
 
 
+$seldomain=$_SESSION['domain'];
 
 switch ($view){
     case "list.tpl":
@@ -55,19 +56,16 @@ switch ($view){
     break;
     case "added.tpl":
     $objectdata=getpost();
-    //create ou
-    $ldapobject="";
 
+    unset($ldapobject);
     $givenname=$objectdata["givenname"];
     $ldapobject["ou"] = $givenname;
-    $fullcn= "ou=".$givenname.",dc=machinet";
+    $fullcn="ou=".$givenname.",dc=machinet";
     echo $fullcn;
     $ldapobject["objectclass"][0]="top";
     $ldapobject["objectclass"][1]="organizationalUnit";
     $result=addobject($fullcn,$ldapobject);
-    
 // container for users
-    $ldapobject="";
 
     $ldapobject["ou"] = $givenname;
     $fullcn= "ou=users,ou=".$givenname.",dc=machinet";
@@ -75,18 +73,18 @@ switch ($view){
     $ldapobject["objectclass"][1]="organizationalUnit";
     $result=addobject($fullcn,$ldapobject);
 
-// container for groups
-    $ldapobject="";
+//container for group
+    unset($ldapobject);
 
     $ldapobject["ou"] = "groups";
     $fullcn= "ou=groups,ou=".$givenname.",dc=machinet";
     $ldapobject["objectclass"][0]="top";
     $ldapobject["objectclass"][1]="organizationalUnit";
     $result=addobject($fullcn,$ldapobject);
-// add the domain
-    $ldapobject="";
+    unset($ldapobject);
     $ldapobject["dc"]= $givenname;
-    $ldapobject["objectclass"][0]="dnsdomain";
+    $ldapobject["objectclass"][0]="top";
+    $ldapobject["objectclass"][1]="dnsdomain";
     $fullcn= "dc=".$givenname.",ou=domains,dc=machinet";
     $result=addobject($fullcn,$ldapobject);
     break;
