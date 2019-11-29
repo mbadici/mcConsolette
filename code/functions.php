@@ -41,7 +41,7 @@ function checklogin($username,$pass)
 {
 global $error_code;
 
-//echo $error_code;
+echo $error_code;
 echo "error";
             return (login($username,$pass));
 //                      }

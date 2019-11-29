@@ -9,6 +9,7 @@ foreach($ldapobject as $field_name => $field_value)
         if($field_value=="") unset($ldapobject[$field_name]);
 
         }
+print_r($ldapobject);
 return $ldapobject;
 }
 
@@ -88,6 +89,7 @@ switch ($view){
     $ldapobject["dc"]= $givenname;
     $ldapobject["objectclass"][0]="dnsdomain";
     $fullcn= "dc=".$givenname.",ou=domains,dc=machinet";
+    print_r($ldapobject);
     $result=addobject($fullcn,$ldapobject);
     break;
 
