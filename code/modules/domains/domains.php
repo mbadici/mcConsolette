@@ -62,7 +62,6 @@ switch ($view){
     $givenname=$objectdata["givenname"];
     $ldapobject["ou"] = $givenname;
     $fullcn="ou=".$givenname.",dc=machinet";
-    echo $fullcn;
     $ldapobject["objectclass"][0]="top";
     $ldapobject["objectclass"][1]="organizationalUnit";
     $result=addobject($fullcn,$ldapobject);

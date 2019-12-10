@@ -96,6 +96,9 @@ break;
 }
 //$basedn="dc=machinet";
 $res = ldap_search($ldapcon, "dc=machinet",$qry)   or die ($nr=0);//or die("ldap search failed1");
+echo "sorted";
+ldap_sort($ldapcon, $res, 'sn');
+
 
 $number=ldap_count_entries($ldapcon,$res);
 if($number<1 or $nr=0) 
