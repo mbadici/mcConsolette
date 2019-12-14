@@ -45,9 +45,13 @@ switch ($view){
     $ldapobject=getpost();
     $op=$ldapobject["op"];
     $type_mod=$ldapobject["type_mod"];
+    $fwd_mod=$ldapobject["fwd_mod"];
     $ldapobject=user_prepare($ldapobject);
 
-    if(isset($type_mod)) {  $op="Del";  $ldapobject=$type_mod;}
+    if(isset($type_mod)) {  $op="Del";  $obj["mail"]=$type_mod; $ldapobject=$obj; $ldapobject=$obj;}
+//    print_r($ldapobject);
+    if(isset($fwd_mod)) {  $op="Del";  $obj["mailforward"]=$fwd_mod; $ldapobject=$obj;}
+//    print_r($ldapobject);
 
     $result=moduser($param,$ldapobject,$op,"users");
     break;

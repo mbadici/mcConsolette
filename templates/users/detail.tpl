@@ -11,6 +11,8 @@
 <table>
 {foreach $result  as $ind}
 <tr>
+
+
 {if $ind@key  eq "mail"}
 <tr>
 {$j=0}
@@ -26,6 +28,10 @@
 <tr> <td> mail </td> <td><input class="form-control" type=text  name= {$ind@key}[{$j}] value=""> </td> </tr>
 {else}
 <td>{$ind@key} </td> <td><input class="form-control" type=text  name= "{$ind@key}"  value="{$ind[0]}"> </td>
+{if $ind@key  eq "mailForward"}
+
+<td> <button type=submit value="{$ind[0]}" name="fwd_mod">Del </button> </td>
+{/if}
 
 {/if}
 

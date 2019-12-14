@@ -27,7 +27,7 @@
 <div id=newform>
 
 <tr>
-<td>member </td><td><input class="form-control" type=text   name=fake value="" id="newmember"> </td>
+<td>member </td><td><input class="form-control" type=text   name=member[0] value="" id="newmember"> </td>
 
 </tr>
 </div>

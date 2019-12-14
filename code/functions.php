@@ -305,7 +305,9 @@ elseif($op="Del")
 {
 $ldapobj="member";
 if($module=="users") $ldapobj="mail";
-$o[$ldapobj]=$ldapobject;
+//$o[$ldapobj]=$ldapobject;
+$o=$ldapobject;
+//print_r($o);
 //echo $ldapobject;
 //echo "<br>";
 //print_r($dn);

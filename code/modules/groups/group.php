@@ -37,10 +37,12 @@ switch($view){
     $op=$ldapobject["op"];
     $fullcn=$ldapobject["userdn"];
 
+    if(isset($type_mod)) {  $op="Del";  $ldapobject=$type_mod;}
+
     $ldapobject=user_prepare($ldapobject);
 //    print_r($ldapobject);
     if($op!="change") { $ldapobject=$op; $op="Del";}
-
+    print_r($ldapobject);
     $result=moduser($fullcn,$ldapobject,$op,"groups");
     break;
     case "added.tpl":
