@@ -22,8 +22,7 @@ switch($view){
     case "list.tpl":
     $basedn="dc=machinet";
     if($seldomain !=NULL) $basedn="ou=Groups,ou=".$seldomain.",dc=machinet";
-
-    $attrib=array("");
+    $attrib=array("sn");
     $result=entrylist($basedn,"objectclass=groupofnames",$attrib);
     break;
     case "detail.tpl":
