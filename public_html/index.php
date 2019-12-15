@@ -21,7 +21,7 @@ $smarty->assign('pass', bin2hex(openssl_random_pseudo_bytes(4)));
 
 $smarty->assign('username',$_SESSION["username"]);
 $smarty->assign('domain',$_SESSION["domain"]);
-$smarty->assign('delay',1);
+$smarty->assign('delay',$delay);
 $smarty->setTemplateDir('../templates/');
 $smarty->setCompileDir('../templates_c/');
 //$smarty->assign('username',$username);

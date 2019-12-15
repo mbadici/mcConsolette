@@ -96,7 +96,6 @@ break;
 }
 //$basedn="dc=machinet";
 $res = ldap_search($ldapcon, "dc=machinet",$qry)   or die ($nr=0);//or die("ldap search failed1");
-echo "sorted";
 ldap_sort($ldapcon, $res, 'sn');
 
 
@@ -306,8 +305,8 @@ $res=ldap_modify($ldapcon,$dn,$ob);
 
 elseif($op="Del")
 {
-$ldapobj="member";
-if($module=="users") $ldapobj="mail";
+//$ldapobj="member";
+//if($module=="users") $ldapobj="mail";
 //$o[$ldapobj]=$ldapobject;
 $o=$ldapobject;
 //print_r($o);

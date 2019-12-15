@@ -7,7 +7,7 @@ function user_prepare($ldapobject){
 foreach($ldapobject["member"]   as $el => $val) { if($val=="") unset($ldapobject["member"][$el]);}
 foreach($ldapobject as $field_name => $field_value)
         {
-        if(($field_name== "userdn")||($field_name== "submit")||($field_name=="op")) unset($ldapobject[$field_name]);
+        if(($field_name== "userdn")||($field_name== "submit")||($field_name=="op")||($field_name=="type_mod")) unset($ldapobject[$field_name]);
         if($field_value=="") unset($ldapobject[$field_name]);
 
         }
@@ -36,15 +36,21 @@ switch($view){
     $result=userdel($param);
     break;
     case "change.tpl":
+
+
     $ldapobject=getpost();
+
+
+
     $op=$ldapobject["op"];
     $fullcn=$ldapobject["userdn"];
-
-    if(isset($type_mod)) {  $op="Del";  $ldapobject=$type_mod;}
+    $type_mod=$ldapobject["type_mod"];
+//    if(isset($type_mod)) {  $op="Del";  $ldapobject=$type_mod;}
+ if(isset($type_mod)) {  $op="Del";  $obj["member"]=$type_mod; $ldapobject=$obj; }
 
     $ldapobject=user_prepare($ldapobject);
-    print_r($ldapobject);
-    if($op!="change") { $ldapobject=$op; $op="Del";}
+//    print_r($ldapobject);
+//    if($op!="change") { $ldapobject=$op; $op="Del";}
     print_r($ldapobject);
     $result=moduser($fullcn,$ldapobject,$op,"groups");
     break;
