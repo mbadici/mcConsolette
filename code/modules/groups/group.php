@@ -4,6 +4,7 @@ function group($view,$param)
 //include_once("functions.php");
 
 function user_prepare($ldapobject){
+print_r($ldapobject);
 foreach($ldapobject["member"]   as $el => $val) { if($val=="") unset($ldapobject["member"][$el]);}
 foreach($ldapobject as $field_name => $field_value)
         {
@@ -51,7 +52,7 @@ switch($view){
     $ldapobject=user_prepare($ldapobject);
 //    print_r($ldapobject);
 //    if($op!="change") { $ldapobject=$op; $op="Del";}
-    print_r($ldapobject);
+//    print_r($ldapobject);
     $result=moduser($fullcn,$ldapobject,$op,"groups");
     break;
     case "added.tpl":

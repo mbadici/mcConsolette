@@ -30,7 +30,7 @@
 
 <tr>
 <td> member </td>
-<td> <input class="form-control" type=text name=member[{$j+1}] id=newmember > </td> 
+<td> <input class="form-control" type=text  id=newmember > </td> 
 </tr>
 </div>
 {else}
@@ -66,14 +66,17 @@ newFields.id = '';
 newFields.style.display = 'block';
 var newField = newFields.childNodes;
 //    for (var i=0;i<newField.lenght;i++) {
-//	    var theName = newField[i].name
+//	    var theName = newField[i].name;
 //		    if (theName)
+
 				newFields.name = "member["+counter+"]";
 counter++;
+
 //				    }
 	newFields.value=selectedValue;
 
 var insertHere = document.getElementById('newmember');
+
 insertHere.parentNode.insertBefore(newFields,insertHere);
 
 
