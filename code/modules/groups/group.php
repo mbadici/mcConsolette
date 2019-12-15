@@ -19,6 +19,10 @@ return $ldapobject;
 
 $seldomain=$_SESSION["domain"];
 switch($view){
+
+
+
+
     case "list.tpl":
     $basedn="dc=machinet";
     if($seldomain !=NULL) $basedn="ou=Groups,ou=".$seldomain.",dc=machinet";
@@ -39,7 +43,7 @@ switch($view){
     if(isset($type_mod)) {  $op="Del";  $ldapobject=$type_mod;}
 
     $ldapobject=user_prepare($ldapobject);
-//    print_r($ldapobject);
+    print_r($ldapobject);
     if($op!="change") { $ldapobject=$op; $op="Del";}
     print_r($ldapobject);
     $result=moduser($fullcn,$ldapobject,$op,"groups");
@@ -51,6 +55,7 @@ switch($view){
     $ldapobject["objectclass"][0]="groupofnames";
     $ldapobject["member"][0]=$objectdata["surname"];
     $fullcn= "cn=".$ldapobject["cn"].",ou=groups,ou=".$seldomain.",dc=machinet";
+//    print_r($fullcn);
     $result=addobject($fullcn,$ldapobject);
     break;
 

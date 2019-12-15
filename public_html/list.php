@@ -2,7 +2,7 @@
   
 //$tpl=str_replace(".php",".tpl",$_SERVER['PHP_SELF']);
 require_once("../code/functions.php");
-   $result= list_users("NULL","users");
+   $result= list_users("NULL","users",$seldomain);
     echo '<select id="users" multiple="multiple" onclick="addItem()">';
     foreach($result as $elm) {
    echo "<option value='".$elm[0]."'>" ;

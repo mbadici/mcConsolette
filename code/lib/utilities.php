@@ -10,7 +10,7 @@ function listobject($fullcn)
 {
 $ldapcon=bind();
 
-$res = ldap_search($ldapcon, $fullcn,"objectclass=*") or die("ldap search failed");
+$res = ldap_search($ldapcon, $fullcn,"objectclass=*");
 
 ldap_sort($ldapcon, $res, 'uid');
 

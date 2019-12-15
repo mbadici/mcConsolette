@@ -10,10 +10,12 @@ foreach($ldapobject["mail"]   as $el => $val) { if($val=="") unset($ldapobject["
 foreach($ldapobject as $field_name => $field_value)
         {
         if(($field_name== "userdn")||($field_name== "cn")||($field_name== "submit")||($field_name== "objectClass")||($field_name=="op")||($field_name=="type_mod")) unset($ldapobject[$field_name]);
+	if($field_name=="local_deliver")  unset($ldapobject[$field_name]);
+
         if($field_value=="") unset($ldapobject[$field_name]);
 
         }
-//print_r($ldapobject);
+//print_r($param);
 return $ldapobject;
 }
 

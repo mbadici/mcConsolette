@@ -27,8 +27,8 @@
 <div id=newform>
 
 <tr>
-<td>member </td><td><input class="form-control" type=text   name=member[0] value="" id="newmember"> </td>
-
+<td> member </td>
+<td> <input class="form-control" type=text name=member[{$j+1}] id=newmember > </td> 
 </tr>
 </div>
 {else}
@@ -42,7 +42,7 @@
 
 <input type=hidden name=userdn value="{$smarty.get.user}">
 
-  <script type="text/javascript"  src="include/jquery.min.js">
+  <script type="text/javascript"  src="js/jquery.min.js">
 
 </script>
     <script type="text/javascript" language="javascript">

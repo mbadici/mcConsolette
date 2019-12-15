@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "config.inc.php";
 //include_once "code/lang/RO_ro.php";
 function ldap_init()
 {

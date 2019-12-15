@@ -5,7 +5,7 @@
 session_start();
 session_regenerate_id();
 
-define('SMARTY_DIR', '/usr/share/smarty/');
+include_once("../code/config.inc.php");
 
 if(!include_once(SMARTY_DIR . 'Smarty.class.php')) echo "smarty not present, please install it and adjust the path in index.php";
 include_once("../code/functions.php");

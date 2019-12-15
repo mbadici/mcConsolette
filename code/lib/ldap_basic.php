@@ -1,27 +1,28 @@
 <?php
 
 function get_cn($attr,$val){
-return($cn);
+	return($cn);
 }
 
 function new_object($obj) {
 
-ldap_add($obj);
-return 0;
+	ldap_add($obj);
+	return 0;
+
 }
 
 function modify_object($obj) {
-ldap_modify($obj);
+	ldap_modify($obj);
 return 0;
 }
 
 function delete_object($obj) {
-ldap_delete($obj);
+	ldap_delete($obj);
 return 0;
 }
 
 function create_ou($name) {
-return 0;
+	return 0;
 }
 
 function bind(){

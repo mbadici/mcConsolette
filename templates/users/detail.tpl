@@ -37,7 +37,7 @@
 
 </tr>
 {/foreach}
-<tr> <td>mailForward </td><td> <input class="form-control" type=text name=mailforward>  </input> </td> </tr>
+<tr> <td>mailForward </td><td> <input class="form-control" type=text name=mailforward>  </input> </td> <td> comma separated list</td></tr>
 
 
 </table>
