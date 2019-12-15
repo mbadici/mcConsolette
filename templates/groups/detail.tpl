@@ -6,6 +6,7 @@
 {$LANG["details"]}
 {$smarty.get.user}
 
+
 <br>
 <form method=post action=index.php?module=groups&view=change.tpl&user={$smarty.get.user|escape:'url'}>
 <table>
@@ -84,7 +85,7 @@ insertHere.parentNode.insertBefore(newFields,insertHere);
     $(document).ready(function() {
     $("#driver").click(function(event){
 
-    $('#stage').load('list.php')
+    $('#stage').load('list.php?dom={$domain}')
     });
     });
 
