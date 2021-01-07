@@ -15,12 +15,12 @@ global $error_code;
 $view= isset($_GET['view']) ? $_GET['view'] :"welcome.tpl";
 $module= isset($_GET['module']) ? $_GET['module'] :"login";
 $param= isset($_GET['user']) ? $_GET['user'] :"";
-
 $smarty = new Smarty();
 $smarty->assign('pass', bin2hex(openssl_random_pseudo_bytes(4)));
 
 $smarty->assign('username',$_SESSION["username"]);
 $smarty->assign('domain',$_SESSION["domain"]);
+//$delay=20;
 $smarty->assign('delay',$delay);
 $smarty->setTemplateDir('../templates/');
 $smarty->setCompileDir('../templates_c/');

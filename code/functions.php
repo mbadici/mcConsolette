@@ -173,6 +173,7 @@ $mailcustomer["userpassword"]=$password;
 $mailcustomer["uid"]=$uid;
 $mailcustomer["telephonenumber"]="0";
 $mailcustomer["mobile"]="0";
+$mailcustomer["pager"]=$pager;
 //$mailcustoner["vacationActive"]='FALSE';
 $mailcustomer["mail"]= $uid;
 //$mailcustomer[""]= $givenname;$fullcn= "cn=".$mailcustomer["cn"].",ou=Users,dc=machinet";
@@ -265,7 +266,9 @@ if($op=="change")
 //{
 //if(end($ldapobject->member)!="") echo "not";
 //}
+//print_r($ldapobject);
 $res=ldap_modify($ldapcon,$dn,$ldapobject);
+
 }
 elseif($op=="disable")
 {
@@ -297,6 +300,7 @@ echo "<br>";
 
 echo $dn;
 echo "<br>";
+
 $res=ldap_modify($ldapcon,$dn,$ob);
 
 }

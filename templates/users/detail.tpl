@@ -11,6 +11,11 @@
 <table>
 {foreach $result  as $ind}
 <tr>
+{if $ind@key  eq "pager"}
+
+<td>Quota </td> <td><input class="form-control" type=text  name= pager value="{$ind[0]}"> </td>
+{else}
+
 
 
 {if $ind@key  eq "mail"}
@@ -27,16 +32,30 @@
 {/section}
 <tr> <td> mail </td> <td><input class="form-control" type=text  name= {$ind@key}[{$j}] value=""> </td> </tr>
 {else}
+
+
+
+{if $ind@key  eq "userPassword"}
+
+<td>{$ind@key} </td> <td><input class="form-control" type=password  name= "{$ind@key}"  value="{$ind[0]}"> </td>
+{else}
+
 <td>{$ind@key} </td> <td><input class="form-control" type=text  name= "{$ind@key}"  value="{$ind[0]}"> </td>
+{/if}
 {if $ind@key  eq "mailForward"}
 
 <td> <button type=submit value="{$ind[0]}" name="fwd_mod">Del </button> </td>
 {/if}
 
-{/if}
 
+
+{/if}
+{/if}
 </tr>
 {/foreach}
+{if $result["pager"] eq NULL }
+<tr> <td>Quota </td><td> <input class="form-control" type=text name=pager>  </input> </td> <td> </td></tr>
+{/if}
 <tr> <td>mailForward </td><td> <input class="form-control" type=text name=mailforward>  </input> </td> <td> comma separated list</td></tr>
 
 

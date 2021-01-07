@@ -24,6 +24,7 @@ New user
 <tr><td>Givenname</td><td><input class="form-control" type=txt name=givenname id=gn value="" onkeyup="setuid()"> </td></tr>
 <tr><td>Surname</td><td><input class="form-control" type=txt name=surname id=sn onkeyup="setuid()"> </td></tr>
 <tr><td>mail</td><td><input  type=txt name=uid id=uid > @{$domain}</td></tr>
+<tr><td>Quota</td><td><input  type=txt name=pager id=pager value=1000> </td></tr>
 
 </td></tr>
 <tr><td>password</td><td><input class="form-control" type=txt name=password value={$pass}> </td></tr>

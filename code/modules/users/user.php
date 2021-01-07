@@ -62,7 +62,7 @@ switch ($view){
     $op=$ldapobject["op"];
 
     $ldapobject=user_prepare($ldapobject);
-    print_r($ldapobject);
+//    print_r($ldapobject);
     $result=moduser($param,$ldapobject,$op,"users");
     break;
     case "added.tpl":
@@ -72,13 +72,17 @@ switch ($view){
     $ldapobject["sn"]= $surname;
     $ldapobject["cn"]= $givenname." ".$surname;
     $ldapobject["gn"]= $givenname;
+    $ldapobject["pager"]= $objectdata["pager"];
+
     $ldapobject["objectclass"]=array("inetorgperson","accountable","mailaccount");
     $ldapobject["userpassword"]=$objectdata["password"];
-    $ldapobject["uid"]=$objectdata["uid"];
+//    $ldapobject["uid"]=$objectdata["uid"];
+    $ldapobject["uid"]=$objectdata["uid"]."@".$seldomain;
+
     $ldapobject["telephonenumber"]="0";
     $ldapobject["mobile"]="0";
 //$mailcustoner["vacationActive"]='FALSE';
-    $ldapobject["mail"]= $ldapobject["uid"]."@".$seldomain;
+    $ldapobject["mail"]= $objectdata["uid"]."@".$seldomain;
 //    $ldapobject[""]= $givenname;
     $fullcn= "cn=".$ldapobject["cn"].",ou=Users,ou=".$seldomain.",dc=machinet";
     $result=addobject($fullcn,$ldapobject);
