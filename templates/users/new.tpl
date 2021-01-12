@@ -17,14 +17,20 @@ if(tpl==4) document.getElementById('uid').value=parttwo+'.'+partone;
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 </head>
 <body>
-New user
+{if $domain eq ""}
+<p style="color:#FF0000";>
+PLEASE SELECT THE DOMAIN FIRST!
+</p>
+{else}
+add new user to {$domain}
+{/if}
 <Form action=index.php?module=users&view=added.tpl method=post>
 <table>
 
 <tr><td>Givenname</td><td><input class="form-control" type=txt name=givenname id=gn value="" onkeyup="setuid()"> </td></tr>
 <tr><td>Surname</td><td><input class="form-control" type=txt name=surname id=sn onkeyup="setuid()"> </td></tr>
 <tr><td>mail</td><td><input  type=txt name=uid id=uid > @{$domain}</td></tr>
-<tr><td>Quota</td><td><input  type=txt name=pager id=pager value=1000> </td></tr>
+<tr><td>Quota</td><td><input  type=txt name=pager id=pager value=1000M> </td></tr>
 
 </td></tr>
 <tr><td>password</td><td><input class="form-control" type=txt name=password value={$pass}> </td></tr>
