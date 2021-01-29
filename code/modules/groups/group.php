@@ -62,7 +62,7 @@ switch($view){
     $ldapobject["objectclass"][0]="groupofnames";
     $ldapobject["member"][0]=$objectdata["surname"];
     $fullcn= "cn=".$ldapobject["cn"].",ou=groups,ou=".$seldomain.",dc=machinet";
-//    print_r($fullcn);
+//    print_r($ldapobject);
     $result=addobject($fullcn,$ldapobject);
     break;
 
