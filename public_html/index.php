@@ -19,6 +19,8 @@ $smarty = new Smarty();
 $smarty->assign('pass', bin2hex(openssl_random_pseudo_bytes(4)));
 
 $smarty->assign('username',$_SESSION["username"]);
+$smarty->assign('isadmin',$_SESSION["isadmin"]);
+
 $smarty->assign('domain',$_SESSION["domain"]);
 $delay=0;
 $smarty->assign('delay',$delay);

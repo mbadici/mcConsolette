@@ -23,16 +23,24 @@ global $error_code;
 $basedn="dc=machinet";
 $ldapcon=ldap_init();
 $userdn=$rootdn;
-if(!strcmp($user,"admin")) $userdn="cn=Manager,dc=machinet";
-
+if(!strcmp($user,"admin")) 
+{
+$userdn="cn=Manager,dc=machinet";
+$isadmin=1;
+$domain=all;
+}
 if($user!="admin")
 {
+$isadmin=0;
 $res = ldap_search($ldapcon, $basedn,"uid=".$user) or die("no result");
 if(!ldap_count_entries($ldapcon,$res)) return NULL;
 $entry = ldap_first_entry($ldapcon, $res);
 $userdn=ldap_get_dn($ldapcon,$entry);
+$element=explode(",", $userdn);
+end($element);
+$domain=end(explode("=",prev($element)));
 }
-if(ldap_bind($ldapcon,$userdn,$pass)==1) { return $ldapcon;}
+if(ldap_bind($ldapcon,$userdn,$pass)==1) { $_SESSION["isadmin"]=$isadmin; $_SESSION["domain"]=$domain; return $ldapcon;}
 $error_code="BIND";
  return NULL;
 

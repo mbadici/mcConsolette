@@ -18,7 +18,6 @@ $seldomain=$_SESSION['domain'];
 
 switch ($view){
     case "list.tpl":
-//    $result=list_users("objectclass=dnsdomain","domains","ihts.ro");
      $attrib=array("");
 
     $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
@@ -28,14 +27,21 @@ switch ($view){
 
     $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
 
-//    $result=list_users("objectclass=dnsdomain","domains","ihts.ro");
     break;
     case "selected.tpl":
     $posts=getpost();
+    if($_SESSION["isadmin"])
+    {
     $param=$posts["selecteddomain"];
     if($param=="all") $param="";
     $_SESSION["domain"]=$param;
+
     echo $param;
+    }
+    else {
+	echo "you are not allowed to select the domain";
+	}    
+
     break;
 
     case "detail.tpl":

@@ -8,7 +8,6 @@
 
  WELCOME {$username}  ! 
 
-
         <!-- Example row of columns -->
 
           <div class="col-md-4">
