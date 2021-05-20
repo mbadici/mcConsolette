@@ -35,10 +35,12 @@ $res = ldap_search($ldapcon, $basedn,"uid=".$user) or die("no result");
 if(!ldap_count_entries($ldapcon,$res)) return NULL;
 $entry = ldap_first_entry($ldapcon, $res);
 $userdn=ldap_get_dn($ldapcon,$entry);
-$_SESSION["domain"]=$domain;
+
 $element=explode(",", $userdn);
 end($element);
 $domain=end(explode("=",prev($element)));
+$_SESSION["domain"]=$domain;
+
 }
 if(ldap_bind($ldapcon,$userdn,$pass)==1) { $_SESSION["isadmin"]=$isadmin;  return $ldapcon;}
 $error_code="BIND";
