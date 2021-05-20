@@ -27,7 +27,6 @@ if(!strcmp($user,"admin"))
 {
 $userdn="cn=Manager,dc=machinet";
 $isadmin=1;
-$domain=all;
 }
 if($user!="admin")
 {
@@ -36,11 +35,12 @@ $res = ldap_search($ldapcon, $basedn,"uid=".$user) or die("no result");
 if(!ldap_count_entries($ldapcon,$res)) return NULL;
 $entry = ldap_first_entry($ldapcon, $res);
 $userdn=ldap_get_dn($ldapcon,$entry);
+$_SESSION["domain"]=$domain;
 $element=explode(",", $userdn);
 end($element);
 $domain=end(explode("=",prev($element)));
 }
-if(ldap_bind($ldapcon,$userdn,$pass)==1) { $_SESSION["isadmin"]=$isadmin; $_SESSION["domain"]=$domain; return $ldapcon;}
+if(ldap_bind($ldapcon,$userdn,$pass)==1) { $_SESSION["isadmin"]=$isadmin;  return $ldapcon;}
 $error_code="BIND";
  return NULL;
 
@@ -73,11 +73,7 @@ $ldapcon=ldap_init() or die("Error connecting");
 //echo $seldomain;
 if($seldomain!="alldomains")
 {
-//$seldomain="ihts.ro";
-#$basedn="ou=".$seldomain.",dc=machinet";
-#}
-#else
-#{
+
 $basedn="dc=machinet";
 }
 

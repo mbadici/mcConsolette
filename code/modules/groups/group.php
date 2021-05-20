@@ -19,6 +19,7 @@ return $ldapobject;
 
 
 $seldomain=$_SESSION["domain"];
+echo $seldomain;
 switch($view){
 
 
@@ -65,6 +66,32 @@ switch($view){
 //    print_r($ldapobject);
     $result=addobject($fullcn,$ldapobject);
     break;
+
+   case "distadded.tpl":
+    $objectdata=getpost();
+    $givenname=ucfirst($objectdata["givenname"]);
+    $surname=ucfirst($objectdata["givenname"]);
+    $ldapobject["sn"]= $surname;
+    $ldapobject["cn"]= $givenname." ".$surname;
+    $ldapobject["gn"]= $givenname;
+
+    $ldapobject["objectclass"]=array("inetorgperson");
+//    $ldapobject["uid"]=$objectdata["uid"];
+    $ldapobject["uid"]=$objectdata["givenname"];
+
+    $ldapobject["telephonenumber"]="0";
+    $ldapobject["mobile"]="0";
+//$mailcustoner["vacationActive"]='FALSE';
+    $ldapobject["mail"]= $objectdata["givenname"]."@".$seldomain;
+//    $ldapobject[""]= $givenname;
+//    print_r($ldapobject);
+    $fullcn= "cn=".$ldapobject["cn"].",ou=Groups,ou=".$seldomain.",dc=machinet";
+
+    $result=addobject($fullcn,$ldapobject);
+    break;
+
+
+
 
 }
 
