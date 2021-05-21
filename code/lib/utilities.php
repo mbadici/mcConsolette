@@ -42,12 +42,15 @@ else{
 $entry = ldap_first_entry($ldapcon, $res);
 $userdn=ldap_get_dn($ldapcon,$entry);
 $val=ldap_get_values($ldapcon,$entry,"billpaid");
+$mail=ldap_get_values($ldapcon,$entry,"mail");
 
 $info=explode(",", $userdn);
 $moreinfo=explode("=",$info[0]);
 $result[0][0]=$userdn;
 $result[0][1]=$moreinfo[1];
 $result[0][2]=$val[0];
+$result[0][3]=$mail[0];
+
 for($i=1;$i<$number;$i++)
 {
 $entry=ldap_next_entry($ldapcon,$entry);
@@ -55,10 +58,12 @@ $userdn=ldap_get_dn($ldapcon,$entry);
 $info=explode(",", $userdn);
 $moreinfo=explode("=",$info[0]);
 $val=ldap_get_values($ldapcon,$entry,"billpaid");
+$mail=ldap_get_values($ldapcon,$entry,"mail");
 
 $result[$i][0]=$userdn;
 $result[$i][1]=$moreinfo[1];
 $result[$i][2]=$val[0];
+$result[$i][3]=$mail[0];
 
 }
 }

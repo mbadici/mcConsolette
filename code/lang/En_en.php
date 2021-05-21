@@ -21,6 +21,7 @@ $LANG["Disable"]="Disable";
 $LANG["Enable"]="Enable";
 $LANG["Settings"]="Settings";
 $LANG["Change password"]="Change password";
+$LANG["Distgroups"]="Distribution groups";
 $LANG["New distribution group"]="New distribution group";
 $LANG["logout"]="Logout";
 ?>

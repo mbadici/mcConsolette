@@ -15,6 +15,12 @@ if($module!=NULL){
                 include "modules/groups/group.php";
                 return  group($view,$param);
 
+        case "distgroups":
+                include "modules/distgroups/distgroup.php";
+                return  distgroup($view,$param);
+
+
+
         case "domains":
                 include "modules/domains/domains.php";
                 return  domain($view,$param);

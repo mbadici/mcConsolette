@@ -15,6 +15,7 @@
 <a href = index.php?module=login&view=welcome.tpl><input type="button" class="btn btn-outline-success my-2 my-sm-0" name="HOME" value="HOME" /></a>
 <a href = index.php?module=users&view=new.tpl  > <input type="button" class="btn btn-outline-success my-2 my-sm-0" name="New USER" value= "{$LANG["New user"] }" /></a> 
 <a href = index.php?module=groups&view=list.tpl  > <input type="button" class="btn btn-outline-success my-2 my-sm-0" name="Groups" value="{$LANG["Groups"]}" /></a> 
+<a href = index.php?module=distgroups&view=list.tpl  > <input type="button" class="btn btn-outline-success my-2 my-sm-0" name="Distgroups" value="{$LANG["Distgroups"]}" /></a> 
 <a href = index.php?module=domains&view=select.tpl > <input type="button" class="btn btn-outline-success my-2 my-sm-0" name="Select Domain" value="{$LANG["Select domain"]}" /></a>
 <a href = logout.php > <input type="button" class="btn btn-outline-success my-2 my-sm-0" name="logout" value="{$LANG["logout"]}" /> </a>
 </p>

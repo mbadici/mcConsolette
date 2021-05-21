@@ -14,8 +14,6 @@
 {/section}
 </div>
 <a href = index.php?module=groups&view=new.tpl>{$LANG["New group"]}</a>
-<p>
-<a href = index.php?module=groups&view=newdist.tpl>{$LANG["New distribution group"]}</a>
 
 </body>
 </html>
