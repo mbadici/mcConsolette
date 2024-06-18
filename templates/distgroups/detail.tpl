@@ -14,15 +14,15 @@
 <td> mail </td>
 <td> <input class="form-control" type text name= mail value={$result["mail"][0]} > </td>
 </tr>
-{$maildropplace=$result["maildropPlace"] }
+{$vacationforward=$result["vacationForward"]}
 
 
 
-{foreach $maildropplace as $nm=>$maildrop}
+{foreach $vacationforward as $nm=>$vfwd}
 {$j=$nm}
-{if is_numeric($j)}
+{if is_numeric($nm)}
 <tr>
-<td> member </td> <td><input class="form-control" type=text  name= maildropplace[{$j}] value="{$maildrop}"> </td> <td> <button type=submit value="{$maildrop}" name="type_mod">Del </button> </td>
+<td> member </td> <td><input class="form-control" type=text  name= vacationforward[{$j}] value="{$vfwd}"> </td> <td> <button type=submit value="{$vfwd}" name="type_mod">Del </button> </td>
 </tr>
 {/if}
 {/foreach}
@@ -33,7 +33,7 @@
 
 <tr>
 <td> member </td>
-<td> <input class="form-control" type=text  id=newmember name=maildropplace[{$maildrop}]> </td> 
+<td> <input class="form-control" type=text  id=newmember name=vacationforward[{$vfwd}]> </td> 
 </tr>
 </div>
 

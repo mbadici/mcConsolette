@@ -5,7 +5,7 @@ function distgroup($view,$param)
 
 function user_prepare($ldapobject){
 print_r($ldapobject);
-foreach($ldapobject["maildropplace"]   as $el => $val) { if($val=="") unset($ldapobject["maildropplace"][$el]);}
+foreach($ldapobject["vacationforward"]   as $el => $val) { if($val=="") unset($ldapobject["vacationforward"][$el]);}
 foreach($ldapobject as $field_name => $field_value)
         {
         if(($field_name== "userdn")||($field_name== "submit")||($field_name=="op")||($field_name=="type_mod")) unset($ldapobject[$field_name]);
@@ -48,7 +48,7 @@ switch($view){
     $fullcn=$ldapobject["userdn"];
     $type_mod=$ldapobject["type_mod"];
 //    if(isset($type_mod)) {  $op="Del";  $ldapobject=$type_mod;}
- if(isset($type_mod)) {  $op="Del";  $obj["maildropplace"]=$type_mod; $ldapobject=$obj; }
+ if(isset($type_mod)) {  $op="Del";  $obj["vacationForward"]=$type_mod; $ldapobject=$obj; }
 
     $ldapobject=user_prepare($ldapobject);
 //    print_r($ldapobject);
@@ -65,16 +65,16 @@ switch($view){
     $ldapobject["cn"]= $givenname." ".$surname;
     $ldapobject["gn"]= $givenname;
 
-    $ldapobject["objectclass"]=array("inetorgperson", "genericAccount");
+    $ldapobject["objectclass"]=array("inetorgperson", "genericAccount" , "vacation");
 //    $ldapobject["uid"]=$objectdata["uid"];
     $ldapobject["uid"]=$objectdata["givenname"];
-
+    $ldapobject["vacationActive"]="TRUE";
     $ldapobject["telephonenumber"]="0";
     $ldapobject["mobile"]="0";
 //$mailcustoner["vacationActive"]='FALSE';
     $ldapobject["mail"]= $objectdata["givenname"]."@".$seldomain;
 //    $ldapobject[""]= $givenname;
-//    print_r($ldapobject);
+    print_r($ldapobject);
     $fullcn= "cn=".$ldapobject["cn"].",ou=Groups,ou=".$seldomain.",dc=machinet";
 
     $result=addobject($fullcn,$ldapobject);

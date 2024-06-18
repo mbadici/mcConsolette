@@ -58,12 +58,22 @@ switch ($view){
     $result=moduser($param,$ldapobject,$op,"users");
     break;
     case "disable.tpl":
+
+    $log=fopen("console.log","a");
     $ldapobject=getpost();
     $op=$ldapobject["op"];
+//    $op="disable";
+    
+ 
 
     $ldapobject=user_prepare($ldapobject);
+    fwrite($log,$param." ");
+    fwrite($log,$op);
+    if(isset($ldapobject["billPaid"])) { $ldapobject["billPaid"]="FALSE";}
 //    print_r($ldapobject);
     $result=moduser($param,$ldapobject,$op,"users");
+   fwrite($log,"\r\n");
+	fclose($log);
     break;
     case "added.tpl":
     $objectdata=getpost();

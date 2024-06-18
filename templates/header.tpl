@@ -1,10 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/common.css" />
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 </head>
 <body>
 <div class="header">

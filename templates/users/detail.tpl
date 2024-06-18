@@ -11,11 +11,16 @@
 <table>
 {foreach $result  as $ind}
 <tr>
+{if $ind@key  eq "roomNumber"}
+<tr><td>recovery mail </td><td> <input class="form-control" type=text name=roomNumber value="{$ind[0]}" ></input> </td> </tr>
+
+{else}
+
+
 {if $ind@key  eq "pager"}
 
 <td>Quota </td> <td><input class="form-control" type=text  name= pager value="{$ind[0]}"> </td>
 {else}
-
 
 
 {if $ind@key  eq "mail"}
@@ -48,7 +53,7 @@
 {/if}
 
 
-
+{/if}
 {/if}
 {/if}
 </tr>
@@ -56,6 +61,12 @@
 {if $result["pager"] eq NULL }
 <tr> <td>Quota </td><td> <input class="form-control" type=text name=pager>  </input> </td> <td> </td></tr>
 {/if}
+{if $result["roomNumber"] eq NULL}
+<tr><td>recovery mail </td><td> <input class="form-control" type=text name=roomNumber  ></input> </td> </tr>
+{/if}
+
+
+
 <tr> <td>mailForward </td><td> <input class="form-control" type=text name=mailforward>  </input> </td> <td> comma separated list</td></tr>
 
 

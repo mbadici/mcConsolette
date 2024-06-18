@@ -6,8 +6,13 @@
 
    function DoPost(userdn,val){
 //	var  allstring = '{userdn: userdn,op: val}';
-	$.post('index.php?module=users&view=disable.tpl&user='+userdn , {op: val});  //Your values here..
-	location.reload(true);
+
+	$.post('index.php?module=users&view=disable.tpl&user='+userdn , {op: val}, location.reload(true));  
+//	    $.post('index.php?module=users&view=disable.tpl&user='+userdn , {op: val});
+
+
+
+//	location.reload(true);
     };
 </script>
 {/literal}
@@ -21,7 +26,7 @@
 <div class="col-md-2" > <a href = index.php?module=users&view=detail.tpl&user={$result[ind][0]|escape: 'url'}>{$result[ind][1]}</a></div>
 <div class="col-md-2"><a class="btn btn-secondary" href = index.php?module=users&view=delete.tpl&user={$result[ind][0]|escape: 'url'}>{$LANG["Delete"]}</a></div>
 
-{if $result[ind][2] eq 'TRUE'}
+{if $result[ind][2] ne 'FALSE'}
 {assign var="text" value=$LANG["Disable"]}  {assign var="val" value="disable" }
 
 {else}
