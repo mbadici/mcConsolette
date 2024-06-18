@@ -1,0 +1,6 @@
+I reused few attributes:
+
+roomNumber: recovery mail 
+pager: quota
+vacationmail: distributiongroup member
+
