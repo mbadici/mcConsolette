@@ -12,7 +12,7 @@ global $error_code;
                 // auth okay, setup session
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['password'] = $_POST['password'];
-
+	$_SESSION['Set-Cookie'] = 'SameSite= none';
                                 // redirect to required page
         header( "Location: index.php" );
          } else {

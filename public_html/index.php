@@ -4,8 +4,9 @@
 <?php 
 session_start();
 session_regenerate_id();
+include_once("../code/functions.php");
 
-define('SMARTY_DIR', '/usr/share/php/smarty3/');
+//define('SMARTY_DIR', '/usr/share/php/smarty3/');
 
 if(!include_once(SMARTY_DIR . 'Smarty.class.php')) echo "smarty not present, please install it and adjust the path in index.php";
 include_once("../code/functions.php");
@@ -27,6 +28,8 @@ $smarty->setCompileDir('../templates_c/');
 //$smarty->assign('username',$username);
 //$smarty->assign('pass',$pass);
 $result=dispatcher($module,$view,$param);
+//debug info
+//print_r($result);
 $smarty->assign('result',$result);
 
 $smarty->assign('LANG',$LANG);
