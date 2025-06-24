@@ -2,7 +2,7 @@
 session_start();
 if( isset($_POST['username']) && isset($_POST['password']) )
 {
-include_once("../code/functions.php");
+include_once("../code/lib/ldap_basic.php");
 
 global $error_code;
 
