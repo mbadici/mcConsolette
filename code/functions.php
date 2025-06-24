@@ -68,6 +68,7 @@ $result[$i][1]=$moreinfo[1];
 }
 return $result;
 }
+/*
 function checkAuth()
 {
 if(!defined("AUTHENTICATED"))
@@ -79,6 +80,8 @@ else {
 return 1;
     }
 }
+*/
+
 function details($userdn)
 {
 $ldapcon=ldap_init() or die("Error connecting");

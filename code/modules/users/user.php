@@ -22,13 +22,14 @@ return $ldapobject;
 $seldomain=$_SESSION['domain'];
 
 switch ($view){
-    case "list.tpl":
+    	case "list.tpl":
 //    $result=list_users("mail=*","users",$seldomain);
-    $basedn="dc=machinet";
-    if($seldomain !=NULL) $basedn="ou=Users,ou=".$seldomain.",dc=machinet";
-    $attrib=array("billpaid","uid");
-    $result=entrylist($basedn,"mail=*",$attrib);
-    break;
+    	$basedn="dc=machinet";
+    	if($seldomain !=NULL) $basedn="ou=Users,ou=".$seldomain.",dc=machinet";
+    	$attrib=array("billpaid","uid");
+//    $result=entrylist($basedn,"mail=*",$attrib);
+	$result=get_cn($basedn,"mail=*"); 
+   break;
     case "detail.tpl":
 //    $result=details($param);
     $result=listobject($param);
