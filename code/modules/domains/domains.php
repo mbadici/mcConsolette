@@ -20,12 +20,18 @@ switch ($view){
     case "list.tpl":
      $attrib=array("");
 
-    $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
+//    $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
+
+   $result=get_cn("dc=machinet","objectclass=dnsdomain"); 
+
+
+
     break;
     case "select.tpl":
      $attrib=array("");
 
-    $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
+//    $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
+   $result=get_cn("dc=machinet","objectclass=dnsdomain"); 
 
     break;
     case "selected.tpl":

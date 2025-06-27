@@ -4,84 +4,6 @@ require_once "config.inc.php";
 
 
 
-
-function list_users($query,$ou,$seldomain)
-{
-$ldapcon=ldap_init() or die("Error connecting");
-#$qry="mail=*";
-
-//global $domain;
-//echo $seldomain;
-if($seldomain!="alldomains")
-{
-
-$basedn="dc=machinet";
-}
-
-//global $basedn;
-switch($ou)
-{
-case "users":
-{
-$qry="mail=*".$seldomain;
-//echo $qry;
-break;
-}
-case "groups":
-{
-$qry="objectclass=groupofnames";
-$basedn="dc=machinet";
-break;
-}
-case "domains":
-{
-$qry="objectclass=dnsdomain";
-break;
-}
-}
-//$basedn="dc=machinet";
-$res = ldap_search($ldapcon, "dc=machinet",$qry)   or die ($nr=0);//or die("ldap search failed1");
-ldap_sort($ldapcon, $res, 'sn');
-
-
-$number=ldap_count_entries($ldapcon,$res);
-if($number<1 or $nr=0) 
-{$result[1][0]=$result[1][1]="no result";
-}
-else{
-
-$entry = ldap_first_entry($ldapcon, $res);
-$userdn=ldap_get_dn($ldapcon,$entry);
-$info=explode(",", $userdn);
-$moreinfo=explode("=",$info[0]);
-$result[0][0]=$userdn;
-$result[0][1]=$moreinfo[1];
-for($i=1;$i<$number;$i++)
-{
-$entry=ldap_next_entry($ldapcon,$entry);
-$userdn=ldap_get_dn($ldapcon,$entry);
-$info=explode(",", $userdn);
-$moreinfo=explode("=",$info[0]);
-$result[$i][0]=$userdn;
-$result[$i][1]=$moreinfo[1];
-}
-}
-return $result;
-}
-/*
-function checkAuth()
-{
-if(!defined("AUTHENTICATED"))
-{
-echo "please authenticate first";
-return 0;
-}
-else {
-return 1;
-    }
-}
-*/
-
 function details($userdn)
 {
 $ldapcon=ldap_init() or die("Error connecting");
@@ -186,22 +108,8 @@ $ldapcon=uid_bind($_SESSION['username'],$_SESSION['password']);
 
 return ldap_delete($ldapcon,$dn);
 }
-function changepass($dn,$pass,$pass2)
-{
-global $admindn;
-if($pass!=$pass2) return 0;
-$binduser=$_SESSION["username"];
-if($binduser=="admin") $binduser=$admindn;
-else {
-$binduser=$dn;
-}
 
-$bindpw=$_SESSION['password'];
-$command="ldappasswd  -h 192.168.101.3 -D '".$binduser."' -x -w $bindpw -s ".$pass." "."'".$dn."'";
-echo $command;
-return !shell_exec($command);
 
-}
 function moduser($dn,$ldapobject,$op,$module)
 {
 global $domain;

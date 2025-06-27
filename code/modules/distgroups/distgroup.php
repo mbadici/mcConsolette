@@ -29,7 +29,10 @@ switch($view){
     $basedn="dc=machinet";
     if($seldomain !=NULL) $basedn="ou=Groups,ou=".$seldomain.",dc=machinet";
     $attrib=array("mail");
-    $result=entrylist($basedn,"objectclass=inetorgperson",$attrib);
+
+   $result=get_cn($basedn,"objectclass=inetorgperson"); 
+
+//    $result=entrylist($basedn,"objectclass=inetorgperson",$attrib);
     break;
     case "detail.tpl":
     $result=listobject($param);

@@ -97,7 +97,7 @@ function get_cn($ou,$query){
 		}
 	}
 
-
+	sort($result);
 	return($result);
 }
 
@@ -130,6 +130,29 @@ return 0;
 function create_ou($name) {
 	return 0;
 }
+
+function changepass($dn,$pass,$pass2){
+   $ldapcon=ldap_init();
+
+	global $admindn;
+	if($pass!=$pass2) return 0;
+	$ldapcon=bind();
+
+    	$genpw = ldap_exop_passwd($ldapcon, $dn,"", $pass);
+        echo $genpw;
+    	if ($genpw) {
+      	echo $genpw;
+    // use the generated password to bind
+        $bind = ldap_bind($ldapcon, $dn, $genpw);
+    	}
+
+
+
+
+
+}
+
+
 
 function bind(){
 $ldapcon=ldap_init();

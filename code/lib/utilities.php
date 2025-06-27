@@ -24,47 +24,8 @@ function listobject($fullcn){
 	return $result;
 }
 
-function entrylist($basedn,$query,$attrib){
-
-	$ldapcon=bind();
-	$res = ldap_search($ldapcon, $basedn,$query,$attrib);
-	$result = ldap_get_entries($ldapcon, $res);
-	$number=ldap_count_entries($ldapcon,$res);
-	$entry = ldap_first_entry($ldapcon, $res);
-	if($number<1 or $nr=0) {
-		$result[1][0]=$result[1][1]="no result";
-	}
-	else{
-		$entry = ldap_first_entry($ldapcon, $res);		
-		$userdn=ldap_get_dn($ldapcon,$entry);
-		$val=ldap_get_values($ldapcon,$entry,"billPaid");
-		$mail=ldap_get_values($ldapcon,$entry,"mail");
-		$info=explode(",", $userdn);
-		$moreinfo=explode("=",$info[0]);
-		$result[0][0]=$userdn;
-		$result[0][1]=$moreinfo[1];
-		$result[0][2]=$val[0];
-		$result[0][3]=$mail[0];
-
-		for($i=1;$i<$number;$i++){
-			$entry=ldap_next_entry($ldapcon,$entry);
-			$userdn=ldap_get_dn($ldapcon,$entry);
-			$info=explode(",", $userdn);
-			$moreinfo=explode("=",$info[0]);
-			$val=ldap_get_values($ldapcon,$entry,"billPaid");
-			$mail=ldap_get_values($ldapcon,$entry,"mail");
-			$result[$i][0]=$userdn;
-			$result[$i][1]=$moreinfo[1];
-			$result[$i][2]=$val[0];
-			$result[$i][3]=$mail[0];
-		}
-
-	}
-
-return $result;
 
 
-}
 
 ?>
 

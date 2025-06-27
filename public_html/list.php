@@ -1,8 +1,9 @@
 <?php
   
 //$tpl=str_replace(".php",".tpl",$_SERVER['PHP_SELF']);
-require_once("../code/functions.php");
-   $result= list_users("NULL","users", $_GET["dom"]);
+require_once("../code/lib/ldap_basic.php");
+  $base="ou=Users,ou=".$_GET["dom"].",dc=machinet";
+   $result= get_cn($base,   "mail=*");
     echo '<select id="users" multiple="multiple" onclick="addItem()">';
     foreach($result as $elm) {
    echo "<option value='".$elm[0]."'>" ;
