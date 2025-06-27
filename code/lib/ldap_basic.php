@@ -71,11 +71,11 @@ $error_code="BIND";
 
 
 
-function get_cn($ou,$query){
+function get_cn($ou,$query,$attrib){
 
 	$ldapcon=ldap_init() or die("Error connecting");
 
-	$res = ldap_search($ldapcon, $ou,$query)   or die ($nr=0);//or die("ldap search failed1");
+	$res = ldap_search($ldapcon, $ou,$query,$attrib)   or die ($nr=0);//or die("ldap search failed1");
 	$number=ldap_count_entries($ldapcon,$res);
 	if($number<1 or $nr=0) {
 		$result[1][0]=$result[1][1]="no result";
@@ -83,10 +83,14 @@ function get_cn($ou,$query){
 	else{
 		$entry = ldap_first_entry($ldapcon, $res);
 		$userdn=ldap_get_dn($ldapcon,$entry);
+		$res= ldap_get_values($ldapcon, $entry,"billpaid");
+
 		$info=explode(",", $userdn);
 		$moreinfo=explode("=",$info[0]);
 		$result[0][0]=$userdn;
-		$result[0][1]=$moreinfo[1];
+		 $result[0][1]=$moreinfo[1];
+
+		$result[0][2]=$res[0];
 		for($i=1;$i<$number;$i++){
 			$entry=ldap_next_entry($ldapcon,$entry);
 			$userdn=ldap_get_dn($ldapcon,$entry);
@@ -94,6 +98,10 @@ function get_cn($ou,$query){
 			$moreinfo=explode("=",$info[0]);
 			$result[$i][0]=$userdn;
 			$result[$i][1]=$moreinfo[1];
+			$res= ldap_get_values($ldapcon, $entry,"billpaid");
+		 	$result[$i][2]=$res[0];
+
+
 		}
 	}
 

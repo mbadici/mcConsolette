@@ -22,7 +22,7 @@ switch ($view){
 
 //    $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
 
-   $result=get_cn("dc=machinet","objectclass=dnsdomain"); 
+   $result=get_cn("dc=machinet","objectclass=dnsdomain",$attrib); 
 
 
 
@@ -31,7 +31,7 @@ switch ($view){
      $attrib=array("");
 
 //    $result=entrylist("dc=machinet","objectclass=dnsdomain",$attrib);
-   $result=get_cn("dc=machinet","objectclass=dnsdomain"); 
+   $result=get_cn("dc=machinet","objectclass=dnsdomain",$attrib); 
 
     break;
     case "selected.tpl":

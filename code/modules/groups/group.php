@@ -30,7 +30,7 @@ switch($view){
     if($seldomain !=NULL) $basedn="ou=Groups,ou=".$seldomain.",dc=machinet";
     $attrib=array("sn");
 //    $result=entrylist($basedn,"objectclass=groupofnames",$attrib);
-        $result=get_cn($basedn,"objectclass=groupofnames"); 
+        $result=get_cn($basedn,"objectclass=groupofnames",$attrib); 
 
     break;
     case "detail.tpl":

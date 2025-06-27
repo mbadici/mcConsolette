@@ -28,7 +28,7 @@ switch ($view){
     	if($seldomain !=NULL) $basedn="ou=Users,ou=".$seldomain.",dc=machinet";
     	$attrib=array("billpaid","uid");
 //    $result=entrylist($basedn,"mail=*",$attrib);
-	$result=get_cn($basedn,"mail=*"); 
+	$result=get_cn($basedn,"mail=*",$attrib); 
    break;
     case "detail.tpl":
 //    $result=details($param);

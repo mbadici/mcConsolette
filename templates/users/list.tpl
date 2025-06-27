@@ -1,18 +1,15 @@
 <html>
 <head>
+<div id="refresh">
+</div>
  <link rel="stylesheet" type="text/css" href="css/common.css" />
 {literal}
 <script language="javascript"> 
 
    function DoPost(userdn,val){
-//	var  allstring = '{userdn: userdn,op: val}';
+	$.post('index.php?module=users&view=disable.tpl&user='+userdn , {op: val});  
+	document.getElementById("refresh").innerHTML = "<meta http-equiv=REFRESH content=1>";
 
-	$.post('index.php?module=users&view=disable.tpl&user='+userdn , {op: val}, location.reload(true));  
-//	    $.post('index.php?module=users&view=disable.tpl&user='+userdn , {op: val});
-
-
-
-//	location.reload(true);
     };
 </script>
 {/literal}
